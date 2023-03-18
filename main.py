@@ -18,7 +18,7 @@ def main():
     s0 = Servo0()
     s1 = Servo1()
     # TODO initialize DC motor class
-    commands = RadioParser()
+    radioParser = RadioParser()
     cam = Camera()
     #endregion
     
@@ -44,11 +44,12 @@ def main():
     
     #region camera commands
     # TODO use radio class to get a list of commands to execute
+    print(radioParser.parser())
     # IDEA: use generator to iterate through commands, see yield and generator in python
     # for cmd in commands.
-    print(commands.cmd_lst)
-    commands.receive()
-    print(commands.cmd_lst)
+    # print(radioParser.cmd_lst)
+    # radioParser.receive()
+    # print(radioParser.cmd_lst)
     
     s1.rotate(90)
     s1.rotate(-90)
