@@ -10,19 +10,24 @@ factory = PiGPIOFactory()
 servo = Servo(24, pin_factory=factory)
 servo.value = None
 
+#region settings
 ccw = .115
-cw = -.1
+cw = -.2
 t_ratio = .45/90
+#endregion
+
 class Servo1:
     def __init__(self):
         print("servo 1 initiated")
         
-        
     def test(self):
-        # servo.value = cw
-        # time.sleep(0.5)
-        # servo.value = ccw
-        # time.sleep(0.5)
+        '''
+        Testing that the servo works by turning it around a bit
+        '''
+        servo.value = cw
+        time.sleep(0.5)
+        servo.value = ccw
+        time.sleep(0.5)
         servo.value = ccw
         time.sleep(0.45)
         self.stop()
@@ -35,6 +40,7 @@ class Servo1:
             servo.value = ccw
         else:
             servo.value = cw
+            print("negative run")
         time.sleep(t_ratio * abs(degrees))
         self.stop()
        

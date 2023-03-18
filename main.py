@@ -22,25 +22,23 @@ def main():
     cam = Camera()
     #endregion
     
+    theta_DC,theta_0 = imu.GetAdjustments()
+    
     #region tests
     if debug:
-        # s0.test(theta_0)
-        # s1.test()
+        s0.test()
+        s1.test()
         # TODO hardware test DC motor
-        cam.capture("class-test")
+        # cam.capture("class-test")
     #endregion
     
     # TODO: get servo accelerations and determine if rocket has landed or has moved during payload deployment
     
     #region deployment
-    theta_DC,theta_0 = imu.GetAdjustments()
+    
     print(theta_DC, theta_0)
     # TODO: use DC class to make adjustments based on imu
     s0.rotate(theta_0)
-    s1.rotate(90)
-    s1.rotate(180)
-    s1.rotate(-45)
-    s1.rotate(45)
 
     #endregion
     
@@ -51,9 +49,14 @@ def main():
     print(commands.cmd_lst)
     commands.receive()
     print(commands.cmd_lst)
-    cam.capture("class-test")
     
-    # TODO: use servo 1 class to move camera
+    s1.rotate(90)
+    s1.rotate(-90)
+    # s1.rotate(180)
+    s1.rotate(-45)
+    s1.rotate(45)
+    cam.capture()
+
     # TODO: use camera class to take pictures and do filters
     #endregion
     
