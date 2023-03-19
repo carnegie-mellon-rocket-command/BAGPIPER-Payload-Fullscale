@@ -72,7 +72,7 @@ def main():
         
         prev_mag = mag
         time.sleep(.05)
-    #regionend
+    #endregion
         
     #region phase3 deploy
     beep()
@@ -91,15 +91,15 @@ def main():
     #         turns += 1
     #         while abs(theta_DC) < 5:
     #             time.sleep(.1)
-    dc.go()
-    time.sleep(7)
-    while True:
-        theta_DC,theta_0 = imu.GetAdjustments()
-        if abs(theta_DC) < 5:
-            dc.stop()
-            break
+    # dc.go()
+    # time.sleep(7)
+    # while True:
+    #     theta_DC,theta_0 = imu.GetAdjustments()
+    #     if abs(theta_DC) < 5:
+    #         dc.stop()
+    #         break
         
-    s0.rotate(theta_0)
+    # s0.rotate(theta_0)
     print("deployed\n")
     #endregion
     
