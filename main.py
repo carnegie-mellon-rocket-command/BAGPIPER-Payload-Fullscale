@@ -27,7 +27,7 @@ dc = DC()
 radioParser = RadioParser()
 cam = Camera()
 
-log = open("bagpiper-log.txt", "a")
+log = open("bagpiper-log.txt", "a+")
 #endregion
     
 def main():
