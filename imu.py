@@ -4,7 +4,9 @@ import math
 import board
 from adafruit_lsm6ds.ism330dhcx import ISM330DHCX
 
+accels = (0,0,0)
 class IMU:
+    
     def __init__(self):
         self.i2c = board.I2C()
         self.sensor = ISM330DHCX(self.i2c)
@@ -21,8 +23,6 @@ class IMU:
         '''
         [acc_x, acc_y, acc_z] = self.sensor.acceleration
 
-        # TODO correction angle for x is not know because base angle of servo 0 is not known
-
         # offset z by 180 degrees to face up
         offset_z = -math.pi + math.radians(13)
         # Angle along the Z-Axis of rotation needed to point up.
@@ -30,8 +30,6 @@ class IMU:
         # correct for negative adjustment
         if (theta_z < -180):
             theta_z = theta_z + 360
-
-        # Angle along the X-Axis of rotation needed to point up.
 
         # Uses the distance formula (a^2 + b^2 = c^2) to calculate length of "c"
         # between the acceleration values of x and y. This provides a constant
@@ -46,9 +44,24 @@ class IMU:
         offset_x = -math.pi / 2
         # between -90 and +90 is what we want to work with, otherwise tell DC motor to turn over
 
-        theta_x = math.degrees(math.atan2(c * direction, acc_z) + offset_x)
-        # print(f"Angle Z: {theta_z} degrees, Angle X: {theta_x} degrees")
-        # print("Acceleration: X: %.2f, Y: %.2f, Z: %.2f m/s^2" % (sensor.acceleration))
-        # print("Gyro: X: %.2f, Y: %.2f, Z: %.2f radians/s" % (sensor.gyro))
-        # print("")
+        theta_x = math.degrees(math.atan2(c * direction, acc_z) + offset_x) + 23
         return [theta_z, theta_x]
+    
+    def isLaunch(self):
+        '''
+        use IMU measurements to detect when the rocket has launched off the pad
+        '''
+        [x,y,z] = self.sensor.acceleration
+        return [x,y,z]
+        
+        pass
+    
+    def hasLanded(self):
+        '''
+        use IMU meausrements to detect when the rocket has landed
+        '''
+        pass
+    
+    def getAccel(self):
+        (x,y,z) = self.sensor.acceleration
+        return x,y,z
