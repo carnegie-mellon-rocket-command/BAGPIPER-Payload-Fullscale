@@ -36,11 +36,11 @@ class Servo1:
         '''
         Rotates the servo 1 by a number of degrees
         '''
+        degrees = -degrees
         if degrees > 0: #ccw
             servo.value = ccw
         else:
             servo.value = cw
-            print("negative run")
         time.sleep(t_ratio * abs(degrees))
         self.stop()
        

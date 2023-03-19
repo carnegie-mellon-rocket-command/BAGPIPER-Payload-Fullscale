@@ -44,7 +44,7 @@ class IMU:
         offset_x = -math.pi / 2
         # between -90 and +90 is what we want to work with, otherwise tell DC motor to turn over
 
-        theta_x = math.degrees(math.atan2(c * direction, acc_z) + offset_x)
+        theta_x = math.degrees(math.atan2(c * direction, acc_z) + offset_x) + 23
         return [theta_z, theta_x]
     
     def isLaunch(self):
@@ -64,4 +64,4 @@ class IMU:
     
     def getAccel(self):
         (x,y,z) = self.sensor.acceleration
-        return (x,y,z)
+        return x,y,z

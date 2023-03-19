@@ -1,21 +1,10 @@
 import sys
 import time
 
-class RadioParser():
-    received = False
-    cmd_lst = []
-    commands = []
-    
-    
+class RadioParser():    
     def __init__(self):
+        self.commands = []
         print("radio parser initiated")
-        
-    def receive(self):
-        '''
-        Received the commands by listening to radio
-        Once commands received and verified will set received to true and update commands list
-        '''
-        self.cmd_lst = ["A1", "B2", "C3", "D4", "E5", "F6", "G7", "H8"]
         
     def parser(self, debug=False):
         string = self.read_command(debug)
@@ -31,6 +20,7 @@ class RadioParser():
                 return matches
             elif str(string[i:i+2]) in check:
                 matches.append(string[i:i+2])
+                            
         if matches and matches not in self.commands:
             self.commands.append(matches)
             
@@ -47,5 +37,5 @@ class RadioParser():
         
     
     
-r = RadioParser()
-print(r.parser(True))
+# r = RadioParser()
+# print(r.parser())
