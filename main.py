@@ -81,10 +81,24 @@ def main():
     theta_DC,theta_0 = imu.GetAdjustments()
     print(theta_DC, theta_0)
     
-    while (abs(theta_DC) > 5):
-        dc.go()
+    turns = 0
+    turn_time = datetime.now()
+    # while True:
+    #     if turns >= 7 or (datetime.now() - turn_time).total_seconds() > 20:
+    #         print("break turn")
+    #         break
+    #     if abs(theta_DC) < 5:
+    #         turns += 1
+    #         while abs(theta_DC) < 5:
+    #             time.sleep(.1)
+    dc.go()
+    time.sleep(7)
+    while True:
         theta_DC,theta_0 = imu.GetAdjustments()
-    dc.stop()
+        if abs(theta_DC) < 5:
+            dc.stop()
+            break
+        
     s0.rotate(theta_0)
     print("deployed\n")
     #endregion
