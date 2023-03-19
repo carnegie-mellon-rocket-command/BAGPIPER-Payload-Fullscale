@@ -26,6 +26,8 @@ s1 = Servo1()
 dc = DC()
 radioParser = RadioParser()
 cam = Camera()
+
+log = open("bagpiper-log.txt", "a")
 #endregion
     
 def main():
@@ -34,6 +36,7 @@ def main():
     beep()
     
     print("Waiting for launch\n")
+    log.write("Waiting for launch\n")
     a = 0.99
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
@@ -44,6 +47,7 @@ def main():
 
         if (mag > vars['launch_accel']):
             print("Launch\n")
+            log.write("Launch\n")
             break
             
         prev_mag = mag
@@ -66,6 +70,7 @@ def main():
                 land_time = datetime.now()
             if (datetime.now() - land_time).total_seconds() > vars['landing_wait_time']:
                 print("Landed\n")
+                log.write("Landed\n")
                 break
         else:
             land_time = 0
@@ -80,6 +85,7 @@ def main():
     beep()
     theta_DC,theta_0 = imu.GetAdjustments()
     print(theta_DC, theta_0)
+    log.write(theta_DC, theta_0)
     
     turns = 0
     turn_time = datetime.now()
@@ -101,6 +107,7 @@ def main():
         
     # s0.rotate(theta_0)
     print("deployed\n")
+    log.write("deployed\n")
     #endregion
     
     #region phase4 camera commands
@@ -113,6 +120,7 @@ def main():
         commands = radioParser.parser()
         if commands:
             print(commands[0])
+            log.write(commands[0])
             for cmd in commands[0]:
                 if (cmd == "A1"): # Turn camera 60º to the right
                     s1.rotate(60)
@@ -134,6 +142,8 @@ def main():
         if (datetime.now() - start_read).total_seconds() > 300:
             break
         time.sleep(10)
+    
+    log.close()
         
     #endregion
     
