@@ -16,8 +16,13 @@ cw = -.2
 t_ratio = .45/90
 #endregion
 
+
+
 class Servo1:
+    
     def __init__(self):
+        self.left_cnt = 0
+        self.right_cnt = 0
         print("servo 1 initiated")
         
     def test(self):
@@ -36,12 +41,29 @@ class Servo1:
         '''
         Rotates the servo 1 by a number of degrees
         '''
+        reset = False
         degrees = -degrees
-        if degrees > 0: #ccw
-            servo.value = ccw
-        else:
-            servo.value = cw
-        time.sleep(t_ratio * abs(degrees))
+                
+        if degrees > 0: #ccw, right
+            self.right_cnt += 1
+            if self.right_cnt >= 7:
+                reset = True
+                servo.value = cw
+                self.right_cnt = 0
+            else:
+                servo.value = ccw
+        else: # cw, left
+            self.left_cnt += 1
+            if self.left_cnt >= 7:
+                reset = True
+                servo.value = ccw
+                self.left_cnt = 0
+            else:
+                servo.value = cw
+        if reset:
+            time.sleep(t_ratio * abs(360))
+        else:  
+            time.sleep(t_ratio * abs(degrees))
         self.stop()
        
     def stop(self):

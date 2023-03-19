@@ -94,11 +94,11 @@ def main():
     beep()
     beep()
     beep()
-    i = 0
+    start_read = datetime.now()
     while True:
         commands = radioParser.parser()
         if commands:
-            # print(commands[0])
+            print(commands[0])
             for cmd in commands[0]:
                 if (cmd == "A1"): # Turn camera 60º to the right
                     s1.rotate(60)
@@ -116,10 +116,11 @@ def main():
                     pass
                 elif (cmd == "H8"): # Remove all filters.
                     pass
-        i = i+1
-        if i>3:
             break
-        time.sleep(5)
+        if (datetime.now() - start_read).total_seconds() > 300:
+            break
+        time.sleep(10)
+        
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?

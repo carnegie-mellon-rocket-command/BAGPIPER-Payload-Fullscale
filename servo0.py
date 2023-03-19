@@ -46,3 +46,6 @@ class Servo0:
         '''
         time.sleep(1)
         servo.value = None
+
+# servo.value = 1
+# time.sleep(10)

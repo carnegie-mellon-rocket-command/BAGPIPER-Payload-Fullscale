@@ -5,7 +5,7 @@ class DC:
     def __init__(self):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(12, GPIO.OUT)
-        print("servo 1 initiated")
+        print("DC initiated")
     
     def go(self):
         GPIO.output(12, GPIO.HIGH)

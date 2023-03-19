@@ -1,5 +1,8 @@
 import sys
 import time
+import RPi.GPIO as GPIO
+
+GPIO.setup(21, GPIO.OUT)
 
 class RadioParser():    
     def __init__(self):
@@ -7,6 +10,9 @@ class RadioParser():
         print("radio parser initiated")
         
     def parser(self, debug=False):
+        self.beep()
+        self.beep()
+        
         string = self.read_command(debug)
         
         starts = ["XX4XXX", "KC1RWU"]
@@ -34,6 +40,12 @@ class RadioParser():
         command_raw = f.read()
         f.close()
         return command_raw
+    
+    def beep(self):
+        GPIO.output(21, GPIO.HIGH)
+        time.sleep(.2)
+        GPIO.output(21, GPIO.LOW)
+        time.sleep(.2)
         
     
     
