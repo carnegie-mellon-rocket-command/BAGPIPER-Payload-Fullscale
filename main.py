@@ -8,7 +8,9 @@ from servo0 import Servo0
 from servo1 import Servo1
 from camera import Camera
 from radioParser import RadioParser
+from dc import DC
 import math
+import RPi.GPIO as GPIO
 
 debug = True
 vars = {}
@@ -21,13 +23,17 @@ else:
 imu = IMU()
 s0 = Servo0()
 s1 = Servo1()
-# TODO initialize DC motor class
+dc = DC()
 radioParser = RadioParser()
 cam = Camera()
 #endregion
     
 def main():
     #region phase1 on pad
+    GPIO.setup(21, GPIO.OUT)
+    beep()
+    
+    print("Waiting for launch\n")
     a = 0.99
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
@@ -37,7 +43,7 @@ def main():
         mag = prev_mag*a + mag*(1-a)
 
         if (mag > vars['launch_accel']):
-            print("Launch")
+            print("Launch\n")
             break
             
         prev_mag = mag
@@ -45,6 +51,8 @@ def main():
     #endregion
         
     #region phase2 launched/detect land
+    beep()
+    beep()
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
     land_time = 0
@@ -57,23 +65,36 @@ def main():
             if (land_time == 0):
                 land_time = datetime.now()
             if (datetime.now() - land_time).total_seconds() > vars['landing_wait_time']:
-                print("Landed")
+                print("Landed\n")
                 break
         else:
             land_time = 0
         
         prev_mag = mag
         time.sleep(.05)
-        #regionend
+    #regionend
         
     #region phase3 deploy
+    beep()
+    beep()
+    beep()
     theta_DC,theta_0 = imu.GetAdjustments()
     print(theta_DC, theta_0)
-    # TODO: use DC class to make adjustments based on imu
+    
+    while (abs(theta_DC) > 5):
+        dc.go()
+        theta_DC,theta_0 = imu.GetAdjustments()
+    dc.stop()
     s0.rotate(theta_0)
+    print("deployed\n")
     #endregion
     
-    #region camera commands
+    #region phase4 camera commands
+    beep()
+    beep()
+    beep()
+    beep()
+    i = 0
     while True:
         commands = radioParser.parser()
         if commands:
@@ -95,18 +116,22 @@ def main():
                     pass
                 elif (cmd == "H8"): # Remove all filters.
                     pass
-        
+        i = i+1
+        if i>3:
+            break
         time.sleep(5)
-            
-    
-    
-
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
 
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
+
+def beep():
+    GPIO.output(21, GPIO.HIGH)
+    time.sleep(.5)
+    GPIO.output(21, GPIO.LOW)
+    time.sleep(.2)
 
 if __name__ == "__main__":
     main()
