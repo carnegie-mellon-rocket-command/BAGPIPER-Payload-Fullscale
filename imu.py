@@ -4,7 +4,9 @@ import math
 import board
 from adafruit_lsm6ds.ism330dhcx import ISM330DHCX
 
+accels = (0,0,0)
 class IMU:
+    
     def __init__(self):
         self.i2c = board.I2C()
         self.sensor = ISM330DHCX(self.i2c)
@@ -50,6 +52,7 @@ class IMU:
         use IMU measurements to detect when the rocket has launched off the pad
         '''
         [x,y,z] = self.sensor.acceleration
+        return [x,y,z]
         
         pass
     
@@ -58,4 +61,7 @@ class IMU:
         use IMU meausrements to detect when the rocket has landed
         '''
         pass
-        
+    
+    def getAccel(self):
+        (x,y,z) = self.sensor.acceleration
+        return (x,y,z)

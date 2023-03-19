@@ -8,30 +8,19 @@ from camera import Camera
 from radioParser import RadioParser
 
 debug = False
-phase = 1
-
-#region initialize components
-# imu
-imu = IMU()
-s0 = Servo0()
-s1 = Servo1()
-# TODO initialize DC motor class
-radioParser = RadioParser()
-cam = Camera()
-#endregion
 
 def main():
     # os.system("sudo pigpiod")
-    if phase == 1: # on pad
-        pass
-    elif phase == 2: # on launch
-        pass
-    elif phase == 3: # after landing
-        pass
-    elif phase == 4: # deploy
-        pass
-    elif phase == 5: # camera operations
-        pass
+    
+    #region initialize components
+    # imu
+    imu = IMU()
+    s0 = Servo0()
+    s1 = Servo1()
+    # TODO initialize DC motor class
+    radioParser = RadioParser()
+    cam = Camera()
+    #endregion
     
     theta_DC,theta_0 = imu.GetAdjustments()
     
@@ -73,18 +62,6 @@ def main():
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
-
-def phase1():
-    # maybe run tests?
-    while True:
-        x,y,z = imu.getAccel()
-        if False:
-            phase = 2
-            
-def phase2():
-    pass
-    
-            
 
 
 if __name__ == "__main__":
