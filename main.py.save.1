@@ -12,12 +12,12 @@ from dc import DC
 import math
 import RPi.GPIO as GPIO
 
-debug = False
+debug = True
 vars = {}
 if debug:
     vars = dict(launch_accel=11, landing_delta_accel=0.1, landing_wait_time=5)
 else:
-    vars = dict(launch_accel=20, landing_delta_accel=0.1, landing_wait_time=180)
+    vars = dict(launch_accel=20, landing_delta_accel=0.1, landing_wait_time=120)
 
 #region initialize components
 imu = IMU()
@@ -26,8 +26,6 @@ s1 = Servo1()
 dc = DC()
 radioParser = RadioParser()
 cam = Camera()
-
-log = open("bagpiper-log.txt", "a+")
 #endregion
     
 def main():
@@ -36,7 +34,6 @@ def main():
     beep()
     
     print("Waiting for launch\n")
-    log.write("Waiting for launch\n")
     a = 0.99
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
@@ -47,7 +44,6 @@ def main():
 
         if (mag > vars['launch_accel']):
             print("Launch\n")
-            log.write("Launch\n")
             break
             
         prev_mag = mag
@@ -70,14 +66,13 @@ def main():
                 land_time = datetime.now()
             if (datetime.now() - land_time).total_seconds() > vars['landing_wait_time']:
                 print("Landed\n")
-                log.write("Landed\n")
                 break
         else:
             land_time = 0
         
         prev_mag = mag
         time.sleep(.05)
-    #endregion
+    #regionend
         
     #region phase3 deploy
     beep()
@@ -85,29 +80,26 @@ def main():
     beep()
     theta_DC,theta_0 = imu.GetAdjustments()
     print(theta_DC, theta_0)
-    log.write(str(theta_DC) + ', ' + str( theta_0))
     
     turns = 0
-    turn_time = datetime.now()
-    # while True:
-    #     if turns >= 7 or (datetime.now() - turn_time).total_seconds() > 20:
-    #         print("break turn")
-    #         break
-    #     if abs(theta_DC) < 5:
-    #         turns += 1
-    #         while abs(theta_DC) < 5:
-    #             time.sleep(.1)
-    # dc.go()
-    # time.sleep(7)
-    # while True:
-    #     theta_DC,theta_0 = imu.GetAdjustments()
-    #     if abs(theta_DC) < 5:
-    #         dc.stop()
-    #         break
+    urn_time = datetime.now()
+     while True:
+         if turns >= 7 or (datetime.now() - turn_time).total_seconds() > 20:
+             print("break turn")
+             break
+         if abs(theta_DC) < 5:
+             turns += 1
+             while abs(theta_DC) < 5:
+                 time.sleep(.1)
+    time.sleep(7)
+    while True:
+        theta_DC,theta_0 = imu.GetAdjustments()
+        if abs(theta_DC) < 5:
+            dc.stop()
+            break
         
-    # s0.rotate(theta_0)
+    s0.rotate(theta_0)
     print("deployed\n")
-    log.write("deployed\n")
     #endregion
     
     #region phase4 camera commands
@@ -120,7 +112,6 @@ def main():
         commands = radioParser.parser()
         if commands:
             print(commands[0])
-            log.write(str(commands[0]))
             for cmd in commands[0]:
                 if (cmd == "A1"): # Turn camera 60º to the right
                     s1.rotate(60)
@@ -142,8 +133,6 @@ def main():
         if (datetime.now() - start_read).total_seconds() > 300:
             break
         time.sleep(10)
-    
-    log.close()
         
     #endregion
     

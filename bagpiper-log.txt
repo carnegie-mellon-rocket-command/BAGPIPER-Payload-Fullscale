@@ -1,0 +1,12 @@
+Waiting for launch
+Launch
+Landed
+Waiting for launch
+Launch
+Landed
+113.96972783741904, -149.74492642441456deployed
+Waiting for launch
+Launch
+Landed
+99.2065931467456, 16.509939845931108deployed
+['A1', 'C3', 'B2', 'B2', 'C3', 'A1']
