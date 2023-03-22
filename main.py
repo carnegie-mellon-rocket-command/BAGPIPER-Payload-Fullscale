@@ -12,7 +12,7 @@ from dc import DC
 import math
 import RPi.GPIO as GPIO
 
-debug = False
+debug = True
 vars = {}
 if debug:
     vars = dict(launch_accel=11, landing_delta_accel=0.1, landing_wait_time=5)
@@ -105,7 +105,7 @@ def main():
     #         dc.stop()
     #         break
         
-    # s0.rotate(theta_0)
+    s0.rotate(theta_0)
     print("deployed\n")
     log.write("deployed\n")
     #endregion

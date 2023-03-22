@@ -2,9 +2,10 @@ import sys
 import time
 import RPi.GPIO as GPIO
 
-GPIO.setup(21, GPIO.OUT)
-
-class RadioParser():    
+class RadioParser():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(21, GPIO.OUT)
+    
     def __init__(self):
         self.commands = []
         print("radio parser initiated")
@@ -27,14 +28,29 @@ class RadioParser():
                     return matches
                 elif str(string[i:i+2]) in check:
                     matches.append(string[i:i+2])
-                                
-            if matches and matches not in self.commands:
-                self.commands.append(matches)
-                
+            
+            print("matches: " + str(matches))
+            
+            # if matches and matches not in self.commands:
+            #     self.commands.append(matches)
+            tmp = []
+            commands_copy = self.commands
+            for matched_cmd in matches:
+                tmp.append(matched_cmd)
+                for lst in self.commands:
+                    # print(lst)
+                    if lst == tmp:
+                        tmp = []                        
+               
+            if tmp and tmp not in self.commands:         
+                self.commands.append(tmp)
+            
             return self.commands
+        
         except Exception as e:
             with open("aaaaaaa.txt", 'w') as loggg:
                 loggg.write(str(e))
+            print(str(e))
             self.beep()
     
     def read_command(self, debug=False):
@@ -53,6 +69,11 @@ class RadioParser():
         time.sleep(.2)
         
     
+def test():
+    r = RadioParser()
+    while True:
+        commands = r.parser()
+        print(f"out: {commands}")
+        time.sleep(5)
+
     
-# r = RadioParser()
-# print(r.parser())

@@ -9,4 +9,16 @@ Waiting for launch
 Launch
 Landed
 99.2065931467456, 16.509939845931108deployed
+['A1', 'C3', 'B2', 'B2', 'C3', 'A1']Waiting for launch
+Launch
+Landed
+-2.029760092259259, 23.218097779372233deployed
+['A1', 'C3', 'B2', 'B2', 'C3', 'A1']Waiting for launch
+Launch
+Landed
+-1.8927720656016156, 23.38177017081075deployed
+['A1', 'C3', 'B2', 'B2', 'C3', 'A1']Waiting for launch
+Launch
+Landed
+-96.09707921628508, -156.11179510662083deployed
 ['A1', 'C3', 'B2', 'B2', 'C3', 'A1']
