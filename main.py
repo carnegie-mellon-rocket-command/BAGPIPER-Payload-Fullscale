@@ -27,7 +27,8 @@ dc = DC()
 radioParser = RadioParser()
 cam = Camera()
 
-log = open("bagpiper-log.txt", "a+")
+LOGNAME = "bagpiper-log.txt"
+
 #endregion
     
 def main():
@@ -35,9 +36,7 @@ def main():
     GPIO.setup(21, GPIO.OUT)
     beep()
     
-    print("Waiting for launch\n")
-    now = datetime.now()
-    log.write(f"{now}: Waiting for launch\n")
+    log_info("Waiting for launch")
     a = 0.99
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
@@ -47,8 +46,7 @@ def main():
         mag = prev_mag*a + mag*(1-a)
 
         if (mag > vars['launch_accel']):
-            print("Launch\n")
-            log.write("Launch\n")
+            log_info("Launch!")
             break
             
         prev_mag = mag
@@ -70,9 +68,7 @@ def main():
             if (land_time == 0):
                 land_time = datetime.now()
             if (datetime.now() - land_time).total_seconds() > vars['landing_wait_time']:
-                print("Landed\n")
-                now = datetime.now()
-                log.write(f"{now}: Landed\n")
+                log_info("Landed!")
                 break
         else:
             land_time = 0
@@ -86,9 +82,7 @@ def main():
     beep()
     beep()
     theta_DC,theta_0 = imu.GetAdjustments()
-    now = datetime.now()
-    print(theta_DC, theta_0)
-    log.write(f'{now} ' + str(theta_DC) + ', ' + str( theta_0) + '\n')
+    log_info(str(theta_DC) + ', ' + str( theta_0))
     
     turns = 0
     turn_time = datetime.now()
@@ -109,9 +103,7 @@ def main():
     #         break
         
     s0.rotate(theta_0)
-    print("deployed\n")
-    now = datetime.now()
-    log.write(f"{now}: deployed\n")
+    log_info("Deployed!")
     #endregion
     
     #region phase4 camera commands
@@ -124,8 +116,7 @@ def main():
         commands = radioParser.parser()
         if commands:
             print(commands[0])
-            now = datetime.now()
-            log.write(f'{now} ' + str(commands[0])+'\n')
+            log_info(str(commands[0]))
             for cmd in commands[0]:
                 if (cmd == "A1"): # Turn camera 60º to the right
                     s1.rotate(60)
@@ -145,10 +136,9 @@ def main():
                     pass
             break
         if (datetime.now() - start_read).total_seconds() > 300:
+            log_info("Timed out")
             break
         time.sleep(10)
-    
-    log.close()
         
     #endregion
     
@@ -157,11 +147,26 @@ def main():
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
 
-def beep():
+def beep(time_high=0.5, time_low=0.2):
+    '''beeps the amount specified, or else does the default beep'''
     GPIO.output(21, GPIO.HIGH)
-    time.sleep(.5)
+    time.sleep(time_high)
     GPIO.output(21, GPIO.LOW)
-    time.sleep(.2)
+    time.sleep(time_low)
+    
+def log_info(message):
+    with open(LOGNAME, 'a+') as log:
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log.write(f"{now}: {message}\n")
+        print(message)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        # instead of quietly erroring, write the error to a file, beep 
+        # like hell, and then still attempt to raise the error
+        log_info(str(e))
+        for i in range(10):
+            beep(0.1, 0.1)
+        raise(e)
