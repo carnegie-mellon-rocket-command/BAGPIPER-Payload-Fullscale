@@ -116,39 +116,42 @@ def main():
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
+    
 def conductExperiemnt(debug = False):
-    # python -c 'import main; main.conductExperiment(True)'
+    # python -c 'import main; main.conductExperiemnt(True)'
     completed_cmds_lst = []
-    todo_cmds_lst = []
     start_read = datetime.now()
     while True:
         commands_lst = radioParser.parser(debug)
-        todo_cmds = []
         for cmds in commands_lst:
             for completed_cmds in completed_cmds_lst:
                 if cmds == completed_cmds:
-                    commands_lst.remove(cmd)
-        if commands:
-            print(commands_lst)
+                    commands_lst.remove(cmds)
+        print(f"commands_lst: {commands_lst}")
+        # if commands_lst:
+        if not debug:
             log_info(str(commands_lst))
-            for cmd in commands_lst:
-                if (cmd == "A1"): # Turn camera 60º to the right
-                    s1.rotate(60)
-                elif (cmd == "B2"): #Turn camera 60º to the left
-                    s1.rotate(-60)
-                elif (cmd == "C3"): # Take picture
-                    cam.capture("PDF")
-                elif (cmd == "D4"): # Change camera mode from color to grayscale
-                    pass
-                elif (cmd == "E5"): # Change camera mode back from grayscale to color 
-                    pass
-                elif (cmd == "F6"): # Rotate image 180º (upside down).
-                    pass
-                elif (cmd == "G7"): # Special effects filter (Apply any filter or image distortion you want and state what filter or distortion was used)
-                    pass
-                elif (cmd == "H8"): # Remove all filters.
-                    pass
-            break
+        for cmds in commands_lst:
+            completed_cmds_lst.append(cmds)
+            for cmd in cmds:
+                print(cmd)
+                # if (cmd == "A1"): # Turn camera 60º to the right
+                #     s1.rotate(60)
+                # elif (cmd == "B2"): #Turn camera 60º to the left
+                #     s1.rotate(-60)
+                # elif (cmd == "C3"): # Take picture
+                #     cam.capture("PDF")
+                # elif (cmd == "D4"): # Change camera mode from color to grayscale
+                #     pass
+                # elif (cmd == "E5"): # Change camera mode back from grayscale to color 
+                #     pass
+                # elif (cmd == "F6"): # Rotate image 180º (upside down).
+                #     pass
+                # elif (cmd == "G7"): # Special effects filter (Apply any filter or image distortion you want and state what filter or distortion was used)
+                #     pass
+                # elif (cmd == "H8"): # Remove all filters.
+                #     pass
+        
         if (datetime.now() - start_read).total_seconds() > 300:
             log_info("Timed out")
             break
