@@ -24,6 +24,7 @@ class RadioParser():
             
             starts = ["XX4XXX", "KC1RWU"]
             if not [ele for ele in starts if(ele in string)]:
+                print("callsign does not match")
                 return self.commands
             
             matches = []
@@ -35,27 +36,17 @@ class RadioParser():
                     matches.append(string[i:i+2])
             
             print("matches: " + str(matches))
-            
-            more_matches = True
-            # old_cmds = [cmd for command_lst in self.commands for command in cmd_lst]
-            old_cmds = []
-            for sublist in self.commands:
-                for item in sublist:
-                    old_cmds.append(item)
-            for i in range(len(old_cmds)):
-                if i < len(matches):
-                    if old_cmds[:i] != matches[:i]:
-                        self.commands.append(matches[i:])
-                        more_matches = False
-            
-            new_match_cnt = len(matches) - len(old_cmds)
-            if new_match_cnt > 0 and more_matches:
-                print("more matches")
-                self.commands.append(matches[len(old_cmds):])
+
+            # check if matches is in existing commands
+            existing_cmds = [x for x in self.commands if x == matches]
+            if not existing_cmds:
+                # if no existing commands match, add matches to commands
+                self.commands.append(matches)
             
             return self.commands
         
         except Exception as e:
+            print(e)
             raise(e) # log the error with the established format
     
     def read_command(self, debug=False):
