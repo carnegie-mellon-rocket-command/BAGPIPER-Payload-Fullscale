@@ -111,13 +111,27 @@ def main():
     beep()
     beep()
     beep()
+    conductExperiemnt()
+        
+    #endregion
+    
+    #???: ability to re-adjust payload if IMU detects payload has shifted?
+def conductExperiemnt(debug = False):
+    # python -c 'import main; main.conductExperiment(True)'
+    completed_cmds_lst = []
+    todo_cmds_lst = []
     start_read = datetime.now()
     while True:
-        commands = radioParser.parser()
+        commands_lst = radioParser.parser(debug)
+        todo_cmds = []
+        for cmds in commands_lst:
+            for completed_cmds in completed_cmds_lst:
+                if cmds == completed_cmds:
+                    commands_lst.remove(cmd)
         if commands:
-            print(commands[0])
-            log_info(str(commands[0]))
-            for cmd in commands[0]:
+            print(commands_lst)
+            log_info(str(commands_lst))
+            for cmd in commands_lst:
                 if (cmd == "A1"): # Turn camera 60º to the right
                     s1.rotate(60)
                 elif (cmd == "B2"): #Turn camera 60º to the left
@@ -139,10 +153,7 @@ def main():
             log_info("Timed out")
             break
         time.sleep(10)
-        
-    #endregion
-    
-    #???: ability to re-adjust payload if IMU detects payload has shifted?
+
 
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
