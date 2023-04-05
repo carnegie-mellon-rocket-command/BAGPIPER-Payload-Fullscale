@@ -1,0 +1,17 @@
+# v1.0 
+# dcrodrig@andrew.cmu.edu
+[Unit]
+Description=SDR decoder daemon
+Requires=rtl_fm.service
+
+[Service]
+Type=exec
+User=pi
+ExecStart=/usr/bin/multimon-ng -t raw -a AFSK1200 -f alpha /home/pi/rtl_pipe
+# no matter what, if exits, restarts
+StandardOutput=file:/home/pi/Desktop/logs/multimon.txt
+StandardError=file:/home/pi/Desktop/logs/multimon.txt
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

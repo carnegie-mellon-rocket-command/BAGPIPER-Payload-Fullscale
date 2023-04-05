@@ -155,6 +155,7 @@ def beep(time_high=0.5, time_low=0.2):
     time.sleep(time_low)
     
 def log_info(message):
+    '''logs message given AND THEN CLOSES THE FILE TO FLUSH THE BUFFER'''
     with open(LOGNAME, 'a+') as log:
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log.write(f"{now}: {message}\n")

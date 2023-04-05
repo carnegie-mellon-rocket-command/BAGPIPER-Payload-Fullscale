@@ -1,0 +1,16 @@
+# v1.0 
+# dcrodrig@andrew.cmu.edu
+[Unit]
+Description=SDR demodulator daemon
+
+[Service]
+Type=exec
+User=pi
+ExecStart=/usr/bin/rtl_fm -f 144.36M -g 42 -s 22050 -p -19 /home/pi/rtl_pipe
+# no matter what, if exits, restarts
+StandardOutput=file:/home/pi/Desktop/logs/rtl_fm.txt
+StandardError=file:/home/pi/Desktop/logs/rtl_fm.txt
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
