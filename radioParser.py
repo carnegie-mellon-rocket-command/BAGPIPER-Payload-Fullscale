@@ -1,19 +1,24 @@
+'''
+author: Josh Huang
+for testing, use this command: 
+    python -c 'import radioParser; radioParser.test()'
+'''
 import sys
 import time
 import RPi.GPIO as GPIO
+from buzzer import Buzzer
 
 class RadioParser():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(21, GPIO.OUT)
     
     def __init__(self):
         self.commands = []
+        self.buzzer = Buzzer()
         print("radio parser initiated")
         
     def parser(self, debug=False):
         try:
-            self.beep()
-            self.beep()
+            self.buzzer.beep()
+            self.buzzer.beep()
             
             string = self.read_command(debug)
             
@@ -31,27 +36,27 @@ class RadioParser():
             
             print("matches: " + str(matches))
             
-            # if matches and matches not in self.commands:
-            #     self.commands.append(matches)
-            tmp = []
-            commands_copy = self.commands
-            for matched_cmd in matches:
-                tmp.append(matched_cmd)
-                for lst in self.commands:
-                    # print(lst)
-                    if lst == tmp:
-                        tmp = []                        
-               
-            if tmp and tmp not in self.commands:         
-                self.commands.append(tmp)
+            more_matches = True
+            # old_cmds = [cmd for command_lst in self.commands for command in cmd_lst]
+            old_cmds = []
+            for sublist in self.commands:
+                for item in sublist:
+                    old_cmds.append(item)
+            for i in range(len(old_cmds)):
+                if i < len(matches):
+                    if old_cmds[:i] != matches[:i]:
+                        self.commands.append(matches[i:])
+                        more_matches = False
+            
+            new_match_cnt = len(matches) - len(old_cmds)
+            if new_match_cnt > 0 and more_matches:
+                print("more matches")
+                self.commands.append(matches[len(old_cmds):])
             
             return self.commands
         
         except Exception as e:
-            with open("aaaaaaa.txt", 'w') as loggg:
-                loggg.write(str(e))
-            print(str(e))
-            self.beep()
+            raise(e) # log the error with the established format
     
     def read_command(self, debug=False):
         path = "/home/pi/Desktop/logs/multimon.txt"
@@ -61,19 +66,13 @@ class RadioParser():
         command_raw = f.read()
         f.close()
         return command_raw
-    
-    def beep(self):
-        GPIO.output(21, GPIO.HIGH)
-        time.sleep(.2)
-        GPIO.output(21, GPIO.LOW)
-        time.sleep(.2)
         
-    
 def test():
     r = RadioParser()
     while True:
-        commands = r.parser()
+        commands = r.parser(True)
         print(f"out: {commands}")
         time.sleep(5)
+
 
     
