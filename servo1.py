@@ -16,10 +16,7 @@ cw = -.2
 t_ratio = .45/90
 #endregion
 
-
-
 class Servo1:
-    
     def __init__(self):
         self.left_cnt = 0
         self.right_cnt = 0

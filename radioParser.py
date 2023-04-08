@@ -11,7 +11,7 @@ from buzzer import Buzzer
 class RadioParser():
     
     def __init__(self):
-        self.commands = []
+        # self.commands = []
         self.buzzer = Buzzer()
         print("radio parser initiated")
         
@@ -25,7 +25,7 @@ class RadioParser():
             starts = ["XX4XXX", "KC1RWU"]
             if not [ele for ele in starts if(ele in string)]:
                 print("callsign does not match")
-                return self.commands
+                return []
             
             matches = []
             check = {'A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8'}
@@ -35,15 +35,8 @@ class RadioParser():
                 elif str(string[i:i+2]) in check:
                     matches.append(string[i:i+2])
             
-            print("matches: " + str(matches))
-
-            # check if matches is in existing commands
-            existing_cmds = [x for x in self.commands if x == matches]
-            if not existing_cmds:
-                # if no existing commands match, add matches to commands
-                self.commands.append(matches)
-            
-            return self.commands
+            # print("matches: " + str(matches))
+            return matches
         
         except Exception as e:
             print(e)

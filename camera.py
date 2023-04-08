@@ -26,6 +26,7 @@ class Camera:
             
         # take picture and save
         os.system(f"libcamera-still -o {folder}/{filename}.jpg --immediate")
+        # os.system(f"libcamera-still -o images/dir/pic.jpg --immediate")
        
     ### FILTERS ###
     
@@ -68,3 +69,10 @@ class Camera:
         initImg = Image.open(filename)
         filteredImg = initImg.filter(ImageFilter.CONTOUR)
         return filteredImg
+
+def test():
+    # python -c 'import camera; camera.test()'
+    cam = Camera()
+    experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    dir = f"payload_experiment_{experiment_time}"
+    cam.capture("PDF", "test")

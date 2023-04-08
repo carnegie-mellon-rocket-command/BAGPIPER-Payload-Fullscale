@@ -83,24 +83,7 @@ def main():
     beep()
     theta_DC,theta_0 = imu.GetAdjustments()
     log_info(str(theta_DC) + ', ' + str( theta_0))
-    
-    turns = 0
-    turn_time = datetime.now()
-    # while True:
-    #     if turns >= 7 or (datetime.now() - turn_time).total_seconds() > 20:
-    #         print("break turn")
-    #         break
-    #     if abs(theta_DC) < 5:
-    #         turns += 1
-    #         while abs(theta_DC) < 5:
-    #             time.sleep(.1)
-    # dc.go()
-    # time.sleep(7)
-    # while True:
-    #     theta_DC,theta_0 = imu.GetAdjustments()
-    #     if abs(theta_DC) < 5:
-    #         dc.stop()
-    #         break
+    # todo deploy code
         
     s0.rotate(theta_0)
     log_info("Deployed!")
@@ -111,51 +94,69 @@ def main():
     beep()
     beep()
     beep()
-    conductExperiemnt()
+    # conductExperiemnt()
         
+    #endregion
+    
+    #region end script
+    beep(time_high=2)
+    beep(time_high=2)
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
     
-def conductExperiemnt(debug = False):
-    # python -c 'import main; main.conductExperiemnt(True)'
-    completed_cmds_lst = []
+def conductExperiment(debug = False):
+    # python -c 'import main; main.conductExperiment(True)'
+    log_info("Conducting Experiment")
+    todo_cmds = []
+    done_cmds = []
     start_read = datetime.now()
     while True:
-        commands_lst = radioParser.parser(debug)
-        for cmds in commands_lst:
-            for completed_cmds in completed_cmds_lst:
-                if cmds == completed_cmds:
-                    commands_lst.remove(cmds)
-        print(f"commands_lst: {commands_lst}")
-        # if commands_lst:
-        if not debug:
-            log_info(str(commands_lst))
-        for cmds in commands_lst:
-            completed_cmds_lst.append(cmds)
-            for cmd in cmds:
-                print(cmd)
-                # if (cmd == "A1"): # Turn camera 60º to the right
-                #     s1.rotate(60)
-                # elif (cmd == "B2"): #Turn camera 60º to the left
-                #     s1.rotate(-60)
-                # elif (cmd == "C3"): # Take picture
-                #     cam.capture("PDF")
-                # elif (cmd == "D4"): # Change camera mode from color to grayscale
-                #     pass
-                # elif (cmd == "E5"): # Change camera mode back from grayscale to color 
-                #     pass
-                # elif (cmd == "F6"): # Rotate image 180º (upside down).
-                #     pass
-                # elif (cmd == "G7"): # Special effects filter (Apply any filter or image distortion you want and state what filter or distortion was used)
-                #     pass
-                # elif (cmd == "H8"): # Remove all filters.
-                #     pass
+        time.sleep(5)
+        cmd_set = radioParser.parser(debug)
+        
+        # logic for maintaining which commands are done
+        if cmd_set in done_cmds or cmd_set in todo_cmds:
+            # known command
+            continue
+        else:
+            todo_cmds.append(cmd_set)
+            log_info(f"new command: {cmd_set}", False)
+        
+        # execute commands
+        if todo_cmds:
+            experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            dir = f"payload_experiment_{experiment_time}"
+            
+            
+            commands = todo_cmds.pop(0)
+            done_cmds.append(commands)
+            log_info(f"performing commands: {commands}")
+            
+            for cmd in commands:
+                log_info(f"action: {cmd}")
+                if (cmd == "A1"): # Turn camera 60º to the right
+                    s1.rotate(60)
+                elif (cmd == "B2"): #Turn camera 60º to the left
+                    s1.rotate(-60)
+                elif (cmd == "C3"): # Take picture
+                    cam.capture()
+                elif (cmd == "D4"): # Change camera mode from color to grayscale
+                    pass
+                elif (cmd == "E5"): # Change camera mode back from grayscale to color 
+                    pass
+                elif (cmd == "F6"): # Rotate image 180º (upside down).
+                    pass
+                elif (cmd == "G7"): # Special effects filter (Apply any filter or image distortion you want and state what filter or distortion was used)
+                    pass
+                elif (cmd == "H8"): # Remove all filters.
+                    pass
         
         if (datetime.now() - start_read).total_seconds() > 300:
             log_info("Timed out")
             break
-        time.sleep(10)
+        print(f"done commands: {done_cmds}")
+        print(f"todo commands: {todo_cmds}")
 
 
 def magnitude(x,y,z):
@@ -168,12 +169,13 @@ def beep(time_high=0.5, time_low=0.2):
     GPIO.output(21, GPIO.LOW)
     time.sleep(time_low)
     
-def log_info(message):
+def log_info(message, print_terminal=True):
     '''logs message given AND THEN CLOSES THE FILE TO FLUSH THE BUFFER'''
     with open(LOGNAME, 'a+') as log:
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log.write(f"{now}: {message}\n")
-        print(message)
+        if print_terminal:
+            print(message)
 
 if __name__ == "__main__":
     try:
@@ -185,3 +187,4 @@ if __name__ == "__main__":
         for i in range(10):
             beep(0.1, 0.1)
         raise(e)
+
