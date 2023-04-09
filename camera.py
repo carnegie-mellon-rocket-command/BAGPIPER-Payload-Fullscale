@@ -90,7 +90,8 @@ class Camera:
         return
     
     def reset_filters(self):
-        self.filters = dict({'gray': False, 'rotation': 0, 'contour': False})
+        # self.filters = dict({'gray': False, 'rotation': 0, 'contour': False})
+        self.filters['contour'] = False
 
 def test():
     # python -c 'import camera; camera.test()'
