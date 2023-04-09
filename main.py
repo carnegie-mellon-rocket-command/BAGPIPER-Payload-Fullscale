@@ -89,8 +89,7 @@ def main():
     beep()
     beep()
     beep()
-    theta_DC,theta_0 = imu.GetAdjustments()
-    log_info(str(theta_DC) + ', ' + str( theta_0))
+    deployPayload()
     # todo deploy code
     
         
@@ -113,6 +112,13 @@ def main():
     #endregion
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
+    
+def deployPayload(debug=False):
+    # python -c 'import main; main.deployPayload(True)'
+    theta_DC,theta_0 = imu.GetAdjustments()
+    log_info(str(theta_DC) + ', ' + str( theta_0))
+    s0.rotate(theta_0)
+
     
 def conductExperiment(debug=False):
     # python -c 'import main; main.conductExperiment(True)'
@@ -173,7 +179,7 @@ def magnitude(x,y,z):
 def beep(time_high=0.5, time_low=0.2):
     '''beeps the amount specified, or else does the default beep'''
     print('beep')
-    return
+    
     GPIO.output(21, GPIO.HIGH)
     time.sleep(time_high)
     GPIO.output(21, GPIO.LOW)

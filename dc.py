@@ -14,11 +14,11 @@ class DC:
 
         print("DC initiated")
     
-    def go(self):
+    def retract(self):
         GPIO.output(self.forward, GPIO.HIGH)
         GPIO.output(self.back, GPIO.LOW)
 
-    def backward(self):
+    def extend(self):
         GPIO.output(self.forward, GPIO.LOW)
         GPIO.output(self.back, GPIO.HIGH)
         
@@ -29,8 +29,10 @@ class DC:
 def test():
     # python -c 'import dc; dc.test()'
     dc = DC()
-    dc.go()
-    time.sleep(7)
+    dc.extend()
+    time.sleep(4)
+    # dc.retract()
+    # time.sleep(4)
     dc.stop()
-    time.sleep(7)
+    
 
