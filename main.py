@@ -171,6 +171,8 @@ def magnitude(x,y,z):
 
 def beep(time_high=0.5, time_low=0.2):
     '''beeps the amount specified, or else does the default beep'''
+    print('beep')
+    return
     GPIO.output(21, GPIO.HIGH)
     time.sleep(time_high)
     GPIO.output(21, GPIO.LOW)
