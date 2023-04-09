@@ -24,9 +24,14 @@ class Camera:
             # Create a new directory because it does not exist
             os.makedirs(folder)
             
+        # set final file name
+        fname = f"{folder}/{filename}.jpg"
         # take picture and save
-        os.system(f"libcamera-still -o {folder}/{filename}.jpg --immediate")
-        # os.system(f"libcamera-still -o images/dir/pic.jpg --immediate")
+        os.system(f"libcamera-still -n -o {fname} --immediate")
+        
+        # add timestamp
+        print("\nadd time stamp:")
+        self.timestamp(fname)
        
     ### FILTERS ###
     
@@ -37,18 +42,16 @@ class Camera:
         timeString = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         #text parameters
-        width, height = filteredImg.size
+        width, height = initImg.size
         textSize = height/8
         textX = width/8
         textY = height/7
-        textFont = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", 
-                                      textSize)
+        textFont = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", textSize)
         
         #adding timestamp
         filteredImg = initImg
         drawObj = ImageDraw.Draw(filteredImg)
-        drawObj.text(xy=(textX, textY), text=timeString, font=textFont, 
-                     fill = (127, 0, 0))
+        drawObj.text(xy=(textX, textY), text=timeString, fill = (127, 0, 0))#, font=textFont)
         
         return filteredImg
 
@@ -75,4 +78,4 @@ def test():
     cam = Camera()
     experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     dir = f"payload_experiment_{experiment_time}"
-    cam.capture("PDF", "test")
+    cam.capture(filename="test")
