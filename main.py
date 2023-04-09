@@ -92,6 +92,7 @@ def main():
     theta_DC,theta_0 = imu.GetAdjustments()
     log_info(str(theta_DC) + ', ' + str( theta_0))
     # todo deploy code
+    
         
     s0.rotate(theta_0)
     log_info("Deployed!")

@@ -20,6 +20,10 @@ class Camera:
         if filename == None:
             filename = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
         
+        # set folder to be in images
+        if folder != "images":
+            folder = "images/" + folder
+        
         # create folder if folder not exist
         isExist = os.path.exists(folder)
         if not isExist:
@@ -30,16 +34,16 @@ class Camera:
         fname = f"{folder}/{filename}.jpg"
         
         # take picture and save
-        os.system(f"libcamera-still -n -o {fname} --immediate")
+        os.system(f"sudo libcamera-still -n -o {fname} --immediate")
         
         # apply filters
-        if self.filters['gray']:
-            self.grayscale(fname)
-        if self.filters['contour']:
-            self.contour(fname)
+        # if self.filters['gray']:
+        #     self.grayscale(fname)
+        # if self.filters['contour']:
+        #     self.contour(fname)
             
-        self.rotate(self.filters['rotation'], fname)
-        self.timestamp(fname)
+        # self.rotate(self.filters['rotation'], fname)
+        # self.timestamp(fname)
         
        
     ### FILTERS ###
@@ -99,7 +103,7 @@ def test():
     experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     dir = f"payload_experiment_{experiment_time}"
     
-    cam.filters['gray'] = False
-    cam.filters['contour'] = True
-    cam.filters['rotation'] += 180
-    cam.capture(filename="test")
+    # cam.filters['gray'] = False
+    # cam.filters['contour'] = True
+    # cam.filters['rotation'] += 180
+    cam.capture(folder=dir, filename="test")
