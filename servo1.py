@@ -7,7 +7,7 @@ import os
 
 factory = PiGPIOFactory()
 
-servo = Servo(24, pin_factory=factory)
+servo = Servo(24, pin_factory=factory) #original pin 24
 servo.value = None
 
 #region settings

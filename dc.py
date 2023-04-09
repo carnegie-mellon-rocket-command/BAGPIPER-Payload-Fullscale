@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-out = 15 #previously 12
+out = 25 #previously 12
 
 class DC:
     def __init__(self):
