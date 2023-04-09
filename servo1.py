@@ -26,6 +26,7 @@ class Servo1:
         '''
         Testing that the servo works by turning it around a bit
         '''
+        print('testing S1')
         servo.value = cw
         time.sleep(0.5)
         servo.value = ccw
@@ -67,3 +68,7 @@ class Servo1:
         servo.value = None
         time.sleep(1)
 
+def test():
+    # python -c 'import servo1; servo1.test()'
+    s1 = Servo1()
+    s1.test()

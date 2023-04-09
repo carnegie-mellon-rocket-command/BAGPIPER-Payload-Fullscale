@@ -6,7 +6,9 @@ import os
 from datetime import datetime
 
 class Camera:
+    
     def __init__(self):
+        self.filters = dict({'gray': False, 'rotation': 0, 'contour': False})
         print("camera initiated")
         
     def capture(self, folder="images", filename=None):
@@ -26,12 +28,19 @@ class Camera:
             
         # set final file name
         fname = f"{folder}/{filename}.jpg"
+        
         # take picture and save
         os.system(f"libcamera-still -n -o {fname} --immediate")
         
-        # add timestamp
-        print("\nadd time stamp:")
+        # apply filters
+        if self.filters['gray']:
+            self.grayscale(fname)
+        if self.filters['contour']:
+            self.contour(fname)
+            
+        self.rotate(self.filters['rotation'], fname)
         self.timestamp(fname)
+        
        
     ### FILTERS ###
     
@@ -43,39 +52,53 @@ class Camera:
 
         #text parameters
         width, height = initImg.size
-        textSize = height/8
-        textX = width/8
-        textY = height/7
-        textFont = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", textSize)
+        textSize = height/20
+        textX = width/20
+        textY = height/20
+        textFont = ImageFont.truetype("fonts/FreeMono.ttf", int(textSize))
         
         #adding timestamp
         filteredImg = initImg
         drawObj = ImageDraw.Draw(filteredImg)
-        drawObj.text(xy=(textX, textY), text=timeString, fill = (127, 0, 0))#, font=textFont)
+        drawObj.text(xy=(textX, textY), text=timeString, fill = (127), font=textFont)
         
-        return filteredImg
+        filteredImg.save(filename)
+        return
 
     # Makes image greyscale, returning filtered image as pillow Image object
     def grayscale(self, filename):
         initImg = Image.open(filename)
         filteredImg = ImageOps.grayscale(initImg)
-        return filteredImg
+        
+        filteredImg.save(filename)
+        return
 
     # Flips image 180 degrees, returning filtered image as pillow Image object
-    def flip(self, filename):
+    def rotate(self, degrees, filename):
         initImg = Image.open(filename)
-        filteredImg = initImg.rotate(180)
-        return filteredImg
+        filteredImg = initImg.rotate(degrees)
+        
+        filteredImg.save(filename)
+        return
     
     # Turns image into outline, returning filtered image as pillow Image object
-    def edges(self, filename):
+    def contour(self, filename):
         initImg = Image.open(filename)
         filteredImg = initImg.filter(ImageFilter.CONTOUR)
-        return filteredImg
+        
+        filteredImg.save(filename)
+        return
+    
+    def reset_filters(self):
+        self.filters = dict({'gray': False, 'rotation': 0, 'contour': False})
 
 def test():
     # python -c 'import camera; camera.test()'
     cam = Camera()
     experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     dir = f"payload_experiment_{experiment_time}"
+    
+    cam.filters['gray'] = False
+    cam.filters['contour'] = True
+    cam.filters['rotation'] += 180
     cam.capture(filename="test")

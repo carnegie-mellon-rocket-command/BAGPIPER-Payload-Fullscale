@@ -32,6 +32,14 @@ LOGNAME = "bagpiper-log.txt"
 #endregion
     
 def main():
+    # 5 short beeps if debug
+    if debug:
+        beep(.1)
+        beep(.1)
+        beep(.1)
+        beep(.1)
+        beep(.1)
+    
     #region phase1 on pad
     GPIO.setup(21, GPIO.OUT)
     beep()
@@ -94,7 +102,7 @@ def main():
     beep()
     beep()
     beep()
-    # conductExperiemnt()
+    conductExperiment(debug)
         
     #endregion
     
@@ -105,7 +113,7 @@ def main():
     
     #???: ability to re-adjust payload if IMU detects payload has shifted?
     
-def conductExperiment(debug = False):
+def conductExperiment(debug=False):
     # python -c 'import main; main.conductExperiment(True)'
     log_info("Conducting Experiment")
     todo_cmds = []
@@ -116,8 +124,8 @@ def conductExperiment(debug = False):
         cmd_set = radioParser.parser(debug)
         
         # logic for maintaining which commands are done
-        if cmd_set in done_cmds or cmd_set in todo_cmds:
-            # known command
+        if cmd_set in done_cmds or cmd_set in todo_cmds or not cmd_set:
+            # known command or no commands
             continue
         else:
             todo_cmds.append(cmd_set)
@@ -127,7 +135,6 @@ def conductExperiment(debug = False):
         if todo_cmds:
             experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             dir = f"payload_experiment_{experiment_time}"
-            
             
             commands = todo_cmds.pop(0)
             done_cmds.append(commands)
@@ -142,15 +149,15 @@ def conductExperiment(debug = False):
                 elif (cmd == "C3"): # Take picture
                     cam.capture()
                 elif (cmd == "D4"): # Change camera mode from color to grayscale
-                    pass
+                    cam.filters['gray'] = True
                 elif (cmd == "E5"): # Change camera mode back from grayscale to color 
-                    pass
+                    cam.filters['gray'] = False
                 elif (cmd == "F6"): # Rotate image 180º (upside down).
-                    pass
-                elif (cmd == "G7"): # Special effects filter (Apply any filter or image distortion you want and state what filter or distortion was used)
-                    pass
+                    cam.filters['rotation'] += 180
+                elif (cmd == "G7"): # Contour filter
+                    cam.filters['contour'] = True
                 elif (cmd == "H8"): # Remove all filters.
-                    pass
+                    cam.reset_filters()
         
         if (datetime.now() - start_read).total_seconds() > 300:
             log_info("Timed out")
@@ -184,7 +191,9 @@ if __name__ == "__main__":
         # instead of quietly erroring, write the error to a file, beep 
         # like hell, and then still attempt to raise the error
         log_info(str(e))
+        print(e)
         for i in range(10):
             beep(0.1, 0.1)
         raise(e)
+        
 

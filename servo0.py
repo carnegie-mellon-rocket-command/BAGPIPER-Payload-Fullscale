@@ -21,6 +21,7 @@ class Servo0:
         '''
         Test that the servo runs by rotating the servo back and forth
         '''
+        print('testing S0')
         servo.mid()
         time.sleep(1)
         servo.max() 
@@ -47,5 +48,7 @@ class Servo0:
         time.sleep(1)
         servo.value = None
 
-# servo.value = 1
-# time.sleep(10)
+def test():
+    # python -c 'import servo0; servo0.test()'
+    s0 = Servo0()
+    s0.test()
