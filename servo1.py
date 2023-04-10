@@ -12,7 +12,7 @@ servo.value = None
 
 #region settings
 ccw = .115
-cw = -.2
+cw = -.25
 t_ratio = .45/90
 #endregion
 
@@ -31,8 +31,8 @@ class Servo1:
         time.sleep(0.5)
         servo.value = ccw
         time.sleep(0.5)
-        servo.value = ccw
-        time.sleep(0.45)
+        # servo.value = ccw
+        # time.sleep(0.45)
         self.stop()
     
     def rotate(self, degrees):

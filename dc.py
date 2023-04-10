@@ -4,35 +4,25 @@ import time
 out = 12 #previously 12
 
 class DC:
-    def __init__(self, forward=12, back=16):
-        self.forward = forward
-        self.back = back
-
+    def __init__(self, pin=12):
+        self.pin = pin
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.forward, GPIO.OUT)
-        GPIO.setup(self.back, GPIO.OUT)
+        GPIO.setup(self.pin, GPIO.OUT)
 
         print("DC initiated")
-    
-    def retract(self):
-        GPIO.output(self.forward, GPIO.HIGH)
-        GPIO.output(self.back, GPIO.LOW)
 
     def extend(self):
-        GPIO.output(self.forward, GPIO.LOW)
-        GPIO.output(self.back, GPIO.HIGH)
+        
+        GPIO.output(self.pin, GPIO.HIGH)
         
     def stop(self):
-        GPIO.output(self.forward, GPIO.LOW)
-        GPIO.output(self.back, GPIO.LOW)
+        GPIO.output(self.pin, GPIO.LOW)
         
 def test():
     # python -c 'import dc; dc.test()'
     dc = DC()
     dc.extend()
     time.sleep(4)
-    # dc.retract()
-    # time.sleep(4)
     dc.stop()
     
 

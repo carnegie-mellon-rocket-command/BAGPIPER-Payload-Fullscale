@@ -12,7 +12,9 @@ from dc import DC
 import math
 import RPi.GPIO as GPIO
 
+run = False
 debug = True
+
 vars = {}
 if debug:
     vars = dict(launch_accel=11, landing_delta_accel=0.1, landing_wait_time=5)
@@ -206,7 +208,10 @@ def log_info(message, print_terminal=True):
 
 if __name__ == "__main__":
     try:
-        main()
+        if run:
+            main()
+        else:
+            beep(time_high=.1, time_low=.1, n = 4)
     except Exception as e:
         # instead of quietly erroring, write the error to a file, beep 
         # like hell, and then still attempt to raise the error
