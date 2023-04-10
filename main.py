@@ -34,11 +34,7 @@ LOGNAME = "bagpiper-log.txt"
 def main():
     # 5 short beeps if debug
     if debug:
-        beep(.1)
-        beep(.1)
-        beep(.1)
-        beep(.1)
-        beep(.1)
+        beep(.1, n=5)
     
     #region phase1 on pad
     GPIO.setup(21, GPIO.OUT)
@@ -62,8 +58,7 @@ def main():
     #endregion
         
     #region phase2 launched/detect land
-    beep()
-    beep()
+    beep(n=2)
     x,y,z = imu.getAccel()
     prev_mag = magnitude(x,y,z)
     land_time = 0
@@ -86,22 +81,13 @@ def main():
     #endregion
         
     #region phase3 deploy
-    beep()
-    beep()
-    beep()
+    beep(n=3)
     deployPayload()
-    # todo deploy code
     
-        
-    s0.rotate(theta_0)
-    log_info("Deployed!")
     #endregion
     
     #region phase4 camera commands
-    beep()
-    beep()
-    beep()
-    beep()
+    beep(n=4)
     conductExperiment(debug)
         
     #endregion
@@ -117,6 +103,30 @@ def deployPayload(debug=False):
     # python -c 'import main; main.deployPayload(True)'
     theta_DC,theta_0 = imu.GetAdjustments()
     log_info(str(theta_DC) + ', ' + str( theta_0))
+    
+    # deploy playload out of bay by extending until condition met
+    log_info("Extending out of bay")
+    rotations = 0
+    deploy_time = time.now()
+    dc.extend()
+    while True:
+        if rotations < 15 and (datetime.now() - deploy_time).total_seconds() < 30:
+            break
+    dc.stop()
+    
+    log_info("Payload out of bay, aligning camera arm")
+    
+    # do alignment by extending until angle to alignment is less than 5
+    dc.extend()
+    while True:
+        theta_DC,theta_0 = imu.GetAdjustments()
+        if abs(theta_DC) < 5:
+            break
+    dc.stop()
+    
+    log_info("Camera arm aligned, deploying camera arm")    
+    
+    # align camera arm
     s0.rotate(theta_0)
 
     
@@ -176,14 +186,14 @@ def conductExperiment(debug=False):
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
 
-def beep(time_high=0.5, time_low=0.2):
+def beep(time_high=0.5, time_low=0.2, n=1):
     '''beeps the amount specified, or else does the default beep'''
     print('beep')
-    
-    GPIO.output(21, GPIO.HIGH)
-    time.sleep(time_high)
-    GPIO.output(21, GPIO.LOW)
-    time.sleep(time_low)
+    for i in range(0, n):
+        GPIO.output(21, GPIO.HIGH)
+        time.sleep(time_high)
+        GPIO.output(21, GPIO.LOW)
+        time.sleep(time_low)
     
 def log_info(message, print_terminal=True):
     '''logs message given AND THEN CLOSES THE FILE TO FLUSH THE BUFFER'''
