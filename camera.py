@@ -37,13 +37,13 @@ class Camera:
         os.system(f"sudo libcamera-still -n -o {fname} --immediate")
         
         # apply filters
-        # if self.filters['gray']:
-        #     self.grayscale(fname)
-        # if self.filters['contour']:
-        #     self.contour(fname)
+        if self.filters['gray']:
+            self.grayscale(fname)
+        if self.filters['contour']:
+            self.contour(fname)
             
-        # self.rotate(self.filters['rotation'], fname)
-        # self.timestamp(fname)
+        self.rotate(self.filters['rotation'], fname)
+        self.timestamp(fname)
         
        
     ### FILTERS ###

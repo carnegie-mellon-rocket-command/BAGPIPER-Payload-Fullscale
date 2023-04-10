@@ -135,6 +135,11 @@ def deployPayload(debug=False):
     
 def conductExperiment(debug=False):
     # python -c 'import main; main.conductExperiment(True)'
+    
+    if debug:
+        theta_DC,theta_0 = imu.GetAdjustments()
+        s0.rotate(theta_0)
+    
     log_info("Conducting Experiment")
     todo_cmds = []
     done_cmds = []
@@ -167,7 +172,7 @@ def conductExperiment(debug=False):
                 elif (cmd == "B2"): #Turn camera 60º to the left
                     s1.rotate(-60)
                 elif (cmd == "C3"): # Take picture
-                    cam.capture()
+                    cam.capture(folder=dir)
                 elif (cmd == "D4"): # Change camera mode from color to grayscale
                     cam.filters['gray'] = True
                 elif (cmd == "E5"): # Change camera mode back from grayscale to color 

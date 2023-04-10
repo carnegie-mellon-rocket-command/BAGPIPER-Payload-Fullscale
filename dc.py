@@ -1,8 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-out = 12 #previously 12
-
 class DC:
     def __init__(self, pin=12):
         self.pin = pin
@@ -12,7 +10,6 @@ class DC:
         print("DC initiated")
 
     def extend(self):
-        
         GPIO.output(self.pin, GPIO.HIGH)
         
     def stop(self):
