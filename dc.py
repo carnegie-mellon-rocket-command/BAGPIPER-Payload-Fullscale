@@ -19,7 +19,7 @@ def test():
     # python -c 'import dc; dc.test()'
     dc = DC()
     dc.extend()
-    time.sleep(4)
+    time.sleep(2)
     dc.stop()
     
 

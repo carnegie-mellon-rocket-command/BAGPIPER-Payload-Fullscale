@@ -1,0 +1,7 @@
+XX4XXX C3 A4 D4
+handbook: 
+C3 F6 C3 F6 B2 B2 C3.
+
+all commands:
+C3 A1 F6 C3 A1 F6 D4 C3 B2 B2 G7 C3 E5 C3 B2 H8 C3
+normal, flip, normal gray, gray contour, contour, normal

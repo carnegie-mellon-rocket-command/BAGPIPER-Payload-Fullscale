@@ -12,7 +12,7 @@ from dc import DC
 import math
 import RPi.GPIO as GPIO
 
-run = False
+run = True
 debug = True
 
 vars = {}
@@ -109,10 +109,20 @@ def deployPayload(debug=False):
     # deploy playload out of bay by extending until condition met
     log_info("Extending out of bay")
     rotations = 0
-    deploy_time = time.now()
+    add_rotate = False
+    deploy_time = datetime.now()
     dc.extend()
     while True:
-        if rotations < 15 and (datetime.now() - deploy_time).total_seconds() < 30:
+        theta_DC,theta_0 = imu.GetAdjustments()
+        upright = theta_DC > 0 and theta_DC < 5
+        if upright and add_rotate == False:
+            print(f"{rotations} : {theta_DC} : {(datetime.now() - deploy_time).total_seconds()}")
+            add_rotate = True
+            rotations += 1
+        elif not upright:
+            add_rotate = False
+            
+        if rotations > 13 and (datetime.now() - deploy_time).total_seconds() < 40:
             break
     dc.stop()
     
@@ -122,7 +132,7 @@ def deployPayload(debug=False):
     dc.extend()
     while True:
         theta_DC,theta_0 = imu.GetAdjustments()
-        if abs(theta_DC) < 5:
+        if abs(theta_DC) < 3:
             break
     dc.stop()
     
@@ -158,6 +168,9 @@ def conductExperiment(debug=False):
         
         # execute commands
         if todo_cmds:
+            # reset camera 
+            cam.reset_all()
+            
             experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             dir = f"payload_experiment_{experiment_time}"
             
@@ -193,6 +206,10 @@ def conductExperiment(debug=False):
 
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
+
+def set_s0():
+    theta_DC,theta_0 = imu.GetAdjustments()
+    s0.rotate(theta_0)
 
 def beep(time_high=0.5, time_low=0.2, n=1):
     '''beeps the amount specified, or else does the default beep'''
