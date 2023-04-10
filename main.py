@@ -127,6 +127,7 @@ def deployPayload(debug=False):
     log_info("Camera arm aligned, deploying camera arm")    
     
     # align camera arm
+    theta_DC,theta_0 = imu.GetAdjustments()
     s0.rotate(theta_0)
 
     
