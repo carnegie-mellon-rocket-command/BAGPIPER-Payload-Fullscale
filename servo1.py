@@ -71,4 +71,7 @@ class Servo1:
 def test():
     # python -c 'import servo1; servo1.test()'
     s1 = Servo1()
-    s1.test()
+    # s1.test()
+    servo.value = ccw
+    time.sleep(0.5)
+    s1.stop()

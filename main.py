@@ -19,7 +19,7 @@ vars = {}
 if debug:
     vars = dict(launch_accel=11, landing_delta_accel=0.1, landing_wait_time=5)
 else:
-    vars = dict(launch_accel=20, landing_delta_accel=0.1, landing_wait_time=180)
+    vars = dict(launch_accel=25, landing_delta_accel=0.1, landing_wait_time=180)
 
 #region initialize components
 imu = IMU()
@@ -29,7 +29,7 @@ dc = DC()
 radioParser = RadioParser()
 cam = Camera()
 
-LOGNAME = "bagpiper-log.txt"
+LOGNAME = "/home/pi/Desktop/BAGPIPER-FS-Payload/bagpiper-log.txt"
 
 #endregion
     
@@ -122,7 +122,7 @@ def deployPayload(debug=False):
         elif not upright:
             add_rotate = False
             
-        if rotations > 13 and (datetime.now() - deploy_time).total_seconds() < 40:
+        if rotations > 14 and (datetime.now() - deploy_time).total_seconds() < 40:
             break
     dc.stop()
     
@@ -146,20 +146,23 @@ def deployPayload(debug=False):
 def conductExperiment(debug=False):
     # python -c 'import main; main.conductExperiment(True)'
     
-    if debug:
-        theta_DC,theta_0 = imu.GetAdjustments()
-        s0.rotate(theta_0)
-    
+    # if debug:
+    #     theta_DC,theta_0 = imu.GetAdjustments()
+    #     s1.rotate(theta_0)
+     
+    #region perform standard experiement to begin with
+    defaultExperiment()
+    #endregion
     log_info("Conducting Experiment")
     todo_cmds = []
     done_cmds = []
     start_read = datetime.now()
     while True:
         time.sleep(5)
-        cmd_set = radioParser.parser(debug)
+        cmd_set = radioParser.parser()
         
         # logic for maintaining which commands are done
-        if cmd_set in done_cmds or cmd_set in todo_cmds or not cmd_set:
+        if cmd_set and cmd_set in done_cmds or cmd_set in todo_cmds or not cmd_set:
             # known command or no commands
             continue
         else:
@@ -203,13 +206,48 @@ def conductExperiment(debug=False):
         print(f"done commands: {done_cmds}")
         print(f"todo commands: {todo_cmds}")
 
-
+def defaultExperiment():
+    # python -c 'import main; main.defaultExperiment()'
+    cmd_set = radioParser.parser(True)
+    cam.reset_all()
+            
+    experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    dir = f"payload_experiment_{experiment_time}"
+    
+    log_info(f"performing default commands: {cmd_set}")
+    
+    for cmd in cmd_set:
+        log_info(f"action: {cmd}")
+        if (cmd == "A1"): # Turn camera 60º to the right
+            s1.rotate(60)
+        elif (cmd == "B2"): #Turn camera 60º to the left
+            s1.rotate(-60)
+        elif (cmd == "C3"): # Take picture
+            cam.capture(folder=dir)
+        elif (cmd == "D4"): # Change camera mode from color to grayscale
+            cam.filters['gray'] = True
+        elif (cmd == "E5"): # Change camera mode back from grayscale to color 
+            cam.filters['gray'] = False
+        elif (cmd == "F6"): # Rotate image 180º (upside down).
+            cam.filters['rotation'] += 180
+        elif (cmd == "G7"): # Contour filter
+            cam.filters['contour'] = True
+        elif (cmd == "H8"): # Remove all filters.
+            cam.reset_filters()
+    
+    
+    
 def magnitude(x,y,z):
     return math.sqrt(x*x + y*y + z*z)
 
 def set_s0():
+    # python -c 'import main; main.set_s0()'
     theta_DC,theta_0 = imu.GetAdjustments()
     s0.rotate(theta_0)
+    
+def cleanup():
+    # python -c 'import main; main.cleanup()'
+    GPIO.cleanup()
 
 def beep(time_high=0.5, time_low=0.2, n=1):
     '''beeps the amount specified, or else does the default beep'''

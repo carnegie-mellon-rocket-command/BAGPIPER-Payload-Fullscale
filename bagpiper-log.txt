@@ -402,3 +402,448 @@ Launch
 2023-04-09 22:21:54: action: B2
 2023-04-09 22:21:55: action: H8
 2023-04-09 22:21:55: action: C3
+2023-04-11 18:14:03: Waiting for launch
+2023-04-11 18:14:13: Launch!
+2023-04-11 18:14:19: Landed!
+2023-04-11 18:14:21: 167.59756024932904, -155.47041265219883
+2023-04-11 18:14:21: Extending out of bay
+2023-04-11 18:14:34: Payload out of bay, aligning camera arm
+2023-04-11 18:14:34: Camera arm aligned, deploying camera arm
+2023-04-11 18:14:39: Conducting Experiment
+2023-04-11 18:14:45: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-11 18:14:45: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-11 18:14:45: action: C3
+2023-04-11 18:14:47: action: D4
+2023-04-11 18:14:47: action: C3
+2023-04-11 18:14:49: action: A1
+2023-04-11 18:14:50: action: F6
+2023-04-11 18:14:50: action: C3
+2023-04-11 18:14:52: action: A1
+2023-04-11 18:14:53: action: F6
+2023-04-11 18:14:53: action: D4
+2023-04-11 18:14:53: action: C3
+2023-04-11 18:14:55: action: B2
+2023-04-11 18:14:57: action: B2
+2023-04-11 18:14:58: action: G7
+2023-04-11 18:14:58: action: C3
+2023-04-11 18:15:00: action: E5
+2023-04-11 18:15:00: action: C3
+2023-04-11 18:15:03: action: B2
+2023-04-11 18:15:04: action: H8
+2023-04-11 18:15:04: action: C3
+2023-04-11 18:27:57: Waiting for launch
+2023-04-11 18:28:06: Launch!
+2023-04-11 18:28:22: Landed!
+2023-04-11 18:28:24: 134.49162617010802, -154.57113768707094
+2023-04-11 18:28:24: Extending out of bay
+2023-04-11 18:28:38: Payload out of bay, aligning camera arm
+2023-04-11 18:28:38: Camera arm aligned, deploying camera arm
+2023-04-11 18:28:43: Conducting Experiment
+2023-04-11 18:28:48: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-11 18:28:48: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-11 18:28:48: action: C3
+2023-04-11 18:28:51: action: D4
+2023-04-11 18:28:51: action: C3
+2023-04-11 18:28:52: action: A1
+2023-04-11 18:28:54: action: F6
+2023-04-11 18:28:54: action: C3
+2023-04-11 18:28:56: action: A1
+2023-04-11 18:28:57: action: F6
+2023-04-11 18:28:57: action: D4
+2023-04-11 18:28:57: action: C3
+2023-04-11 18:28:59: action: B2
+2023-04-11 18:29:00: action: B2
+2023-04-11 18:29:02: action: G7
+2023-04-11 18:29:02: action: C3
+2023-04-11 18:29:04: action: E5
+2023-04-11 18:29:04: action: C3
+2023-04-11 18:29:06: action: B2
+2023-04-11 18:29:08: action: H8
+2023-04-11 18:29:08: action: C3
+2023-04-11 18:37:20: Waiting for launch
+2023-04-11 18:37:24: Launch!
+2023-04-11 18:37:30: Landed!
+2023-04-11 18:37:32: 100.78338313115074, 21.032468486564674
+2023-04-11 18:37:32: Extending out of bay
+2023-04-11 19:11:59: Waiting for launch
+2023-04-11 19:19:08: Waiting for launch
+2023-04-11 19:31:49: Waiting for launch
+2023-04-11 19:31:59: Launch!
+2023-04-11 19:32:09: Landed!
+2023-04-11 19:32:11: -170.22122452453038, -154.95401793788184
+2023-04-11 19:32:11: Extending out of bay
+2023-04-12 00:09:36: Waiting for launch
+2023-04-12 00:09:40: Launch!
+2023-04-12 00:09:56: Landed!
+2023-04-12 00:09:58: 123.07791500188381, -155.9528331770269
+2023-04-12 00:09:58: Extending out of bay
+2023-04-12 00:20:21: Waiting for launch
+2023-04-12 00:20:22: Launch!
+2023-04-12 00:20:30: Landed!
+2023-04-12 00:20:32: -33.96755062067854, 20.419453685389236
+2023-04-12 00:20:32: Extending out of bay
+2023-04-12 00:20:49: Payload out of bay, aligning camera arm
+2023-04-12 00:20:49: Camera arm aligned, deploying camera arm
+2023-04-12 00:20:54: Conducting Experiment
+2023-04-12 00:21:00: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-12 00:21:00: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-12 00:21:00: action: C3
+2023-04-12 00:21:02: action: D4
+2023-04-12 00:21:02: action: C3
+2023-04-12 00:21:04: action: A1
+2023-04-12 00:21:05: action: F6
+2023-04-12 00:21:05: action: C3
+2023-04-12 00:21:07: action: A1
+2023-04-12 00:21:09: action: F6
+2023-04-12 00:21:09: action: D4
+2023-04-12 00:21:09: action: C3
+2023-04-12 00:21:10: action: B2
+2023-04-12 00:21:12: action: B2
+2023-04-12 00:21:13: action: G7
+2023-04-12 00:21:13: action: C3
+2023-04-12 00:21:15: action: E5
+2023-04-12 00:21:15: action: C3
+2023-04-12 00:21:18: action: B2
+2023-04-12 00:21:19: action: H8
+2023-04-12 00:21:19: action: C3
+2023-04-12 00:23:53: Waiting for launch
+2023-04-12 00:23:54: Launch!
+2023-04-12 00:24:01: Landed!
+2023-04-12 00:24:03: 160.27072035781532, -154.0123531702015
+2023-04-12 00:24:03: Extending out of bay
+2023-04-12 00:24:18: Payload out of bay, aligning camera arm
+2023-04-12 00:24:18: Camera arm aligned, deploying camera arm
+2023-04-12 00:24:22: Conducting Experiment
+2023-04-12 00:24:28: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-12 00:24:28: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-12 00:24:28: action: C3
+2023-04-12 00:24:29: [Errno 2] No such file or directory: 'images/payload_experiment_2023-04-12_00-24-28/04-12-2023_00-24-28.jpg'
+2023-04-12 00:28:26: Waiting for launch
+2023-04-12 00:28:27: Launch!
+2023-04-12 00:28:35: Landed!
+2023-04-12 00:28:37: -43.007006198671505, 20.381899541603946
+2023-04-12 00:28:37: Extending out of bay
+2023-04-12 00:23:48: Waiting for launch
+2023-04-12 00:40:10: Launch!
+2023-04-12 00:40:59: Landed!
+2023-04-12 00:41:01: -40.14393189275128, 21.306374981618195
+2023-04-12 00:41:01: Extending out of bay
+2023-04-12 00:41:20: Payload out of bay, aligning camera arm
+2023-04-12 00:41:20: Camera arm aligned, deploying camera arm
+2023-04-12 00:41:25: Conducting Experiment
+2023-04-12 00:41:30: [Errno 2] No such file or directory: 'testing_code/multimon.txt'
+2023-04-12 00:43:01: Waiting for launch
+2023-04-12 00:43:07: Launch!
+2023-04-12 00:43:13: Landed!
+2023-04-12 00:43:15: -78.1583965036599, -154.9650251991751
+2023-04-12 00:43:15: Extending out of bay
+2023-04-12 00:43:32: Payload out of bay, aligning camera arm
+2023-04-12 00:43:32: Camera arm aligned, deploying camera arm
+2023-04-12 00:43:36: Conducting Experiment
+2023-04-12 00:43:47: new command: ['B2', 'C3', 'A1']
+2023-04-12 00:43:47: performing commands: ['B2', 'C3', 'A1']
+2023-04-12 00:43:47: action: B2
+2023-04-12 00:43:49: action: C3
+2023-04-12 00:43:51: action: A1
+2023-04-12 00:46:51: Waiting for launch
+2023-04-12 00:47:45: Launch!
+2023-04-12 00:47:55: Landed!
+2023-04-12 00:47:57: -14.259567087205946, 21.42008909956362
+2023-04-12 00:47:57: Extending out of bay
+2023-04-12 00:48:12: Payload out of bay, aligning camera arm
+2023-04-12 00:48:12: Camera arm aligned, deploying camera arm
+2023-04-12 00:48:15: Conducting Experiment
+2023-04-12 00:51:00: Waiting for launch
+2023-04-12 00:51:09: Launch!
+2023-04-12 00:51:21: Landed!
+2023-04-12 00:51:23: 135.04834299851743, -154.82789214437378
+2023-04-12 00:51:23: Extending out of bay
+2023-04-12 00:53:51: Waiting for launch
+2023-04-12 00:54:42: Launch!
+2023-04-12 00:54:51: Landed!
+2023-04-12 00:54:53: 86.47030051950406, 20.81245572433036
+2023-04-12 00:54:53: Extending out of bay
+2023-04-12 00:55:05: Payload out of bay, aligning camera arm
+2023-04-12 00:55:05: Camera arm aligned, deploying camera arm
+2023-04-12 00:55:09: Conducting Experiment
+2023-04-12 00:56:55: Waiting for launch
+2023-04-12 00:57:04: Launch!
+2023-04-12 00:57:12: Landed!
+2023-04-12 00:57:14: 145.8928142551487, -154.06519297455685
+2023-04-12 00:57:14: Extending out of bay
+2023-04-12 00:57:45: Payload out of bay, aligning camera arm
+2023-04-12 00:57:45: Camera arm aligned, deploying camera arm
+2023-04-12 00:57:49: Conducting Experiment
+2023-04-12 00:58:18: new command: ['B2', 'A1', 'C3', 'C3', 'F6', 'A1', 'B2']
+2023-04-12 00:58:18: performing commands: ['B2', 'A1', 'C3', 'C3', 'F6', 'A1', 'B2']
+2023-04-12 00:58:18: action: B2
+2023-04-12 00:58:19: action: A1
+2023-04-12 00:58:20: action: C3
+2023-04-12 00:58:23: action: C3
+2023-04-12 00:58:24: action: F6
+2023-04-12 00:58:24: action: A1
+2023-04-12 00:58:26: action: B2
+2023-04-12 01:00:45: Waiting for launch
+2023-04-12 01:00:49: Launch!
+2023-04-12 01:00:55: Landed!
+2023-04-12 01:00:57: -68.2793218757282, 21.603645289970913
+2023-04-12 01:00:57: Extending out of bay
+2023-04-12 01:01:35: Payload out of bay, aligning camera arm
+2023-04-12 01:01:35: Camera arm aligned, deploying camera arm
+2023-04-12 01:01:39: Conducting Experiment
+2023-04-12 01:02:14: new command: ['B2', 'A1', 'C3', 'C3', 'F6', 'A1', 'B2']
+2023-04-12 01:02:14: performing commands: ['B2', 'A1', 'C3', 'C3', 'F6', 'A1', 'B2']
+2023-04-12 01:02:14: action: B2
+2023-04-12 01:02:15: action: A1
+2023-04-12 01:02:17: action: C3
+2023-04-12 01:02:20: action: C3
+2023-04-12 01:02:22: action: F6
+2023-04-12 01:02:22: action: A1
+2023-04-12 01:02:24: action: B2
+2023-04-12 01:06:26: Waiting for launch
+2023-04-12 01:07:01: Launch!
+2023-04-12 01:10:08: Landed!
+2023-04-12 01:10:10: 143.92567428012222, -155.12365648741218
+2023-04-12 01:10:10: Extending out of bay
+2023-04-12 01:10:39: Payload out of bay, aligning camera arm
+2023-04-12 01:10:39: Camera arm aligned, deploying camera arm
+2023-04-12 01:10:42: Conducting Experiment
+2023-04-12 01:06:26: Waiting for launch
+2023-04-12 01:17:10: Waiting for launch
+2023-04-12 01:38:46: Waiting for launch
+2023-04-12 01:39:16: Waiting for launch
+2023-04-12 01:39:20: Launch!
+2023-04-12 01:39:46: Landed!
+2023-04-12 01:39:48: -142.30197014109814, -155.3265830944565
+2023-04-12 01:39:48: Extending out of bay
+2023-04-12 01:40:21: Payload out of bay, aligning camera arm
+2023-04-12 01:40:21: Camera arm aligned, deploying camera arm
+2023-04-12 01:40:24: Conducting Experiment
+2023-04-12 01:17:10: Waiting for launch
+2023-04-12 01:30:13: Waiting for launch
+2023-04-14 00:27:50: Waiting for launch
+2023-04-14 00:59:49: Launch!
+2023-04-14 01:09:13: Waiting for launch
+2023-04-14 01:09:21: Launch!
+2023-04-14 01:09:28: Landed!
+2023-04-14 01:09:30: 164.23088631337993, -154.6300400589388
+2023-04-14 01:09:30: Extending out of bay
+2023-04-14 01:09:47: Payload out of bay, aligning camera arm
+2023-04-14 01:09:47: Camera arm aligned, deploying camera arm
+2023-04-14 01:09:52: Conducting Experiment
+2023-04-14 01:24:18: Waiting for launch
+2023-04-14 01:24:21: Launch!
+2023-04-14 01:24:28: Landed!
+2023-04-14 01:24:30: -21.765927084464256, 21.345946084826004
+2023-04-14 01:24:30: Extending out of bay
+2023-04-14 01:24:47: Payload out of bay, aligning camera arm
+2023-04-14 01:24:47: Camera arm aligned, deploying camera arm
+2023-04-14 01:24:52: Conducting Experiment
+2023-04-14 01:24:58: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:24:58: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:24:58: action: C3
+2023-04-14 01:25:00: action: D4
+2023-04-14 01:25:00: action: C3
+2023-04-14 01:25:02: action: A1
+2023-04-14 01:25:03: action: F6
+2023-04-14 01:25:03: action: C3
+2023-04-14 01:25:05: action: A1
+2023-04-14 01:25:06: action: F6
+2023-04-14 01:25:06: action: D4
+2023-04-14 01:25:06: action: C3
+2023-04-14 01:25:08: action: B2
+2023-04-14 01:27:27: Conducting Experiment
+2023-04-14 01:27:44: Conducting Experiment
+2023-04-14 01:27:50: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:27:50: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:27:50: action: C3
+2023-04-14 01:27:52: action: D4
+2023-04-14 01:27:52: action: C3
+2023-04-14 01:30:43: Waiting for launch
+2023-04-14 01:36:43: Waiting for launch
+2023-04-14 01:36:44: Launch!
+2023-04-14 01:36:44: Launch!
+2023-04-14 01:36:52: Landed!
+2023-04-14 01:36:52: Landed!
+2023-04-14 01:36:54: -31.157833629857613, 21.540872940648235
+2023-04-14 01:36:54: Extending out of bay
+2023-04-14 01:36:54: -44.973872811070216, 18.36443306229641
+2023-04-14 01:36:54: Extending out of bay
+2023-04-14 01:37:08: Payload out of bay, aligning camera arm
+2023-04-14 01:37:08: Payload out of bay, aligning camera arm
+2023-04-14 01:37:08: Camera arm aligned, deploying camera arm
+2023-04-14 01:37:08: Camera arm aligned, deploying camera arm
+2023-04-14 01:37:13: Conducting Experiment
+2023-04-14 01:37:13: Conducting Experiment
+2023-04-14 01:37:18: [Errno 2] No such file or directory: 'testing_code/multimon.txt'
+2023-04-14 01:39:42: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:39:42: action: C3
+2023-04-14 01:39:45: action: D4
+2023-04-14 01:39:45: action: C3
+2023-04-14 01:39:47: action: A1
+2023-04-14 01:39:48: action: F6
+2023-04-14 01:39:48: action: C3
+2023-04-14 01:39:50: action: A1
+2023-04-14 01:39:51: action: F6
+2023-04-14 01:39:51: action: D4
+2023-04-14 01:39:51: action: C3
+2023-04-14 01:39:53: action: B2
+2023-04-14 01:39:55: action: B2
+2023-04-14 01:39:56: action: G7
+2023-04-14 01:39:56: action: C3
+2023-04-14 01:39:58: action: E5
+2023-04-14 01:39:58: action: C3
+2023-04-14 01:40:01: action: B2
+2023-04-14 01:40:02: action: H8
+2023-04-14 01:40:02: action: C3
+2023-04-14 01:41:01: Conducting Experiment
+2023-04-14 01:41:34: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:41:34: action: C3
+2023-04-14 01:41:36: action: D4
+2023-04-14 01:41:36: action: C3
+2023-04-14 01:41:38: action: A1
+2023-04-14 01:41:39: action: F6
+2023-04-14 01:41:39: action: C3
+2023-04-14 01:41:49: Conducting Experiment
+2023-04-14 01:43:01: Conducting Experiment
+2023-04-14 01:43:07: new command: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:43:07: performing commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:43:07: action: C3
+2023-04-14 01:43:09: action: D4
+2023-04-14 01:43:09: action: C3
+2023-04-14 01:43:11: action: A1
+2023-04-14 01:43:12: action: F6
+2023-04-14 01:43:12: action: C3
+2023-04-14 01:43:14: action: A1
+2023-04-14 01:43:16: action: F6
+2023-04-14 01:43:16: action: D4
+2023-04-14 01:43:16: action: C3
+2023-04-14 01:43:17: action: B2
+2023-04-14 01:43:19: action: B2
+2023-04-14 01:43:20: action: G7
+2023-04-14 01:43:20: action: C3
+2023-04-14 01:43:22: action: E5
+2023-04-14 01:43:22: action: C3
+2023-04-14 01:43:25: action: B2
+2023-04-14 01:43:26: action: H8
+2023-04-14 01:43:26: action: C3
+2023-04-14 01:43:41: Conducting Experiment
+2023-04-14 01:44:10: new command: ['A1', 'B2', 'C3', 'D4', 'E5']
+2023-04-14 01:44:10: performing commands: ['A1', 'B2', 'C3', 'D4', 'E5']
+2023-04-14 01:44:10: action: A1
+2023-04-14 01:44:11: action: B2
+2023-04-14 01:44:13: action: C3
+2023-04-14 01:44:15: action: D4
+2023-04-14 01:44:15: action: E5
+2023-04-14 01:45:41: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:45:41: action: C3
+2023-04-14 01:45:43: action: D4
+2023-04-14 01:45:43: action: C3
+2023-04-14 01:45:45: action: A1
+2023-04-14 01:45:46: action: F6
+2023-04-14 01:45:46: action: C3
+2023-04-14 01:45:48: action: A1
+2023-04-14 01:45:49: action: F6
+2023-04-14 01:45:49: action: D4
+2023-04-14 01:45:49: action: C3
+2023-04-14 01:45:51: action: B2
+2023-04-14 01:45:53: action: B2
+2023-04-14 01:45:54: action: G7
+2023-04-14 01:45:54: action: C3
+2023-04-14 01:45:56: action: E5
+2023-04-14 01:45:56: action: C3
+2023-04-14 01:45:59: action: B2
+2023-04-14 01:46:00: action: H8
+2023-04-14 01:46:00: action: C3
+2023-04-14 01:46:02: Conducting Experiment
+2023-04-14 01:46:54: new command: ['C3', 'A1', 'G7', 'C3', 'H8', 'B2', 'C3']
+2023-04-14 01:46:54: performing commands: ['C3', 'A1', 'G7', 'C3', 'H8', 'B2', 'C3']
+2023-04-14 01:46:54: action: C3
+2023-04-14 01:46:56: action: A1
+2023-04-14 01:46:58: action: G7
+2023-04-14 01:46:58: action: C3
+2023-04-14 01:47:00: action: H8
+2023-04-14 01:47:00: action: B2
+2023-04-14 01:47:01: action: C3
+2023-04-14 01:49:03: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 01:49:03: action: C3
+2023-04-14 01:49:05: action: D4
+2023-04-14 01:49:05: action: C3
+2023-04-14 01:47:46: Waiting for launch
+2023-04-14 01:58:56: Launch!
+2023-04-14 01:59:11: Landed!
+2023-04-14 01:59:14: -14.44089662017002, 20.987674472940846
+2023-04-14 01:59:14: Extending out of bay
+2023-04-14 02:01:12: Waiting for launch
+2023-04-14 02:01:31: Launch!
+2023-04-14 02:04:46: Landed!
+2023-04-14 02:04:48: 102.37941767902583, 21.214714902092478
+2023-04-14 02:04:48: Extending out of bay
+2023-04-14 02:05:07: Payload out of bay, aligning camera arm
+2023-04-14 02:05:07: Camera arm aligned, deploying camera arm
+2023-04-14 02:05:13: [Errno 2] No such file or directory: 'testing_code/multimon.txt'
+2023-04-14 02:09:09: Waiting for launch
+2023-04-14 02:09:12: Launch!
+2023-04-14 02:09:19: Landed!
+2023-04-14 02:09:21: 70.42610279469477, 22.009432417089982
+2023-04-14 02:09:21: Extending out of bay
+2023-04-14 02:09:56: Payload out of bay, aligning camera arm
+2023-04-14 02:09:56: Camera arm aligned, deploying camera arm
+2023-04-14 02:10:02: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 02:10:02: action: C3
+2023-04-14 02:10:05: action: D4
+2023-04-14 02:10:05: action: C3
+2023-04-14 02:10:07: action: A1
+2023-04-14 02:10:08: action: F6
+2023-04-14 02:10:08: action: C3
+2023-04-14 02:10:10: action: A1
+2023-04-14 02:10:11: action: F6
+2023-04-14 02:10:11: action: D4
+2023-04-14 02:10:11: action: C3
+2023-04-14 02:10:13: action: B2
+2023-04-14 02:10:14: action: B2
+2023-04-14 02:10:16: action: G7
+2023-04-14 02:10:16: action: C3
+2023-04-14 02:10:18: action: E5
+2023-04-14 02:10:18: action: C3
+2023-04-14 02:10:21: action: B2
+2023-04-14 02:10:22: action: H8
+2023-04-14 02:10:22: action: C3
+2023-04-14 02:10:24: Conducting Experiment
+2023-04-14 02:18:41: Waiting for launch
+2023-04-14 02:18:51: Launch!
+2023-04-14 02:19:00: Landed!
+2023-04-14 02:19:02: 20.85261512639164, 22.073522516533227
+2023-04-14 02:19:02: Extending out of bay
+2023-04-14 02:19:37: Payload out of bay, aligning camera arm
+2023-04-14 02:19:37: Camera arm aligned, deploying camera arm
+2023-04-14 02:19:43: performing default commands: ['C3', 'D4', 'C3', 'A1', 'F6', 'C3', 'A1', 'F6', 'D4', 'C3', 'B2', 'B2', 'G7', 'C3', 'E5', 'C3', 'B2', 'H8', 'C3']
+2023-04-14 02:19:43: action: C3
+2023-04-14 02:19:45: action: D4
+2023-04-14 02:19:45: action: C3
+2023-04-14 02:19:47: action: A1
+2023-04-14 02:19:48: action: F6
+2023-04-14 02:19:48: action: C3
+2023-04-14 02:19:50: action: A1
+2023-04-14 02:19:51: action: F6
+2023-04-14 02:19:51: action: D4
+2023-04-14 02:19:51: action: C3
+2023-04-14 02:19:53: action: B2
+2023-04-14 02:19:55: action: B2
+2023-04-14 02:19:56: action: G7
+2023-04-14 02:19:56: action: C3
+2023-04-14 02:19:58: action: E5
+2023-04-14 02:19:58: action: C3
+2023-04-14 02:20:01: action: B2
+2023-04-14 02:20:02: action: H8
+2023-04-14 02:20:02: action: C3
+2023-04-14 02:20:04: Conducting Experiment
+2023-04-14 02:20:39: new command: ['C3', 'A1', 'G7', 'C3', 'H8', 'B2', 'C3']
+2023-04-14 02:20:39: performing commands: ['C3', 'A1', 'G7', 'C3', 'H8', 'B2', 'C3']
+2023-04-14 02:20:39: action: C3
+2023-04-14 02:20:41: action: A1
+2023-04-14 02:20:42: action: G7
+2023-04-14 02:20:42: action: C3
+2023-04-14 02:20:45: action: H8
+2023-04-14 02:20:45: action: B2
+2023-04-14 02:20:46: action: C3

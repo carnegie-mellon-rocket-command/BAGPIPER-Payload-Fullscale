@@ -33,7 +33,7 @@ class Servo0:
         Rotates the base servo 0 by a number of degrees, degrees given by IMU in main class
         '''
         # adjust rotation for angle of servo arm and get it to servo readable scale
-        rot = -degrees# + adjustment_angle
+        rot = -degrees + adjustment_angle
         rot = rot/90
         
         # limit rot from limit_angle to 1
