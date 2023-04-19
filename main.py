@@ -13,13 +13,13 @@ import math
 import RPi.GPIO as GPIO
 
 run = True
-debug = True
+debug = False
 
 vars = {}
 if debug:
     vars = dict(launch_accel=11, landing_delta_accel=0.1, landing_wait_time=5)
 else:
-    vars = dict(launch_accel=25, landing_delta_accel=0.1, landing_wait_time=180)
+    vars = dict(launch_accel=25, landing_delta_accel=0.1, landing_wait_time=69)
 
 #region initialize components
 imu = IMU()
@@ -34,9 +34,15 @@ LOGNAME = "/home/pi/Desktop/BAGPIPER-FS-Payload/bagpiper-log.txt"
 #endregion
     
 def main():
+    # python -c 'import main; main.main()'
     # 5 short beeps if debug
     if debug:
         beep(.1, n=5)
+        b,c = imu.GetAdjustments()
+        # if abs(b) <= 180:
+        #     beep(time_high=1)
+        # if abs(c) <= 180:
+        #     beep(time_high=2)
     
     #region phase1 on pad
     GPIO.setup(21, GPIO.OUT)
@@ -104,35 +110,58 @@ def main():
 def deployPayload(debug=False):
     # python -c 'import main; main.deployPayload(True)'
     theta_DC,theta_0 = imu.GetAdjustments()
+    
     log_info(str(theta_DC) + ', ' + str( theta_0))
     
     # deploy playload out of bay by extending until condition met
     log_info("Extending out of bay")
     rotations = 0
-    add_rotate = False
+    counted_rotation = False
     deploy_time = datetime.now()
+    prev_count_time = datetime.now()
     dc.extend()
-    while True:
-        theta_DC,theta_0 = imu.GetAdjustments()
-        upright = theta_DC > 0 and theta_DC < 5
-        if upright and add_rotate == False:
-            print(f"{rotations} : {theta_DC} : {(datetime.now() - deploy_time).total_seconds()}")
-            add_rotate = True
-            rotations += 1
-        elif not upright:
-            add_rotate = False
+    #while True:
+        #theta_DC,theta_0 = imu.GetAdjustments()
+        
+        #upright = theta_DC > 0 and theta_DC < 6
+        #if upright and not counted_rotation and (datetime.now() - prev_count_time).total_seconds() > .2:
             
-        if rotations > 14 and (datetime.now() - deploy_time).total_seconds() < 40:
-            break
+            #log_info(f"{rotations} : {theta_DC} : {(datetime.now() - deploy_time).total_seconds()}")
+            #rotations += 1
+            #counted_rotation = True
+            #prev_count_time = datetime.now()
+            #beep(time_high=.5, n=1)
+        # elif not upright and counted_rotation:
+        #elif theta_DC > 20 and theta_DC < 30 and counted_rotation:
+        #    counted_rotation = False
+            
+        #if rotations >= 13 or (datetime.now() - deploy_time).total_seconds() > 40:
+            #log_info(f"rotation: {rotations}, date time break: {(datetime.now() - deploy_time).total_seconds()}")
+            #break
+
+    rotation_cycle_time = 0
+    rotations_limit = 13
+    rotations = 0
+    previous_is_upright = False
+
+    while rotations < rotations_limit:
+        theta_DC,theta_0 = imu.GetAdjustments()
+        is_upright = theta_DC > 0 and theta_DC < 6
+        if (previous_is_upright == False and is_upright == True):
+            rotations += 1
+        log_info(f"rotations: {rotations}, is_upright: {is_upright}, prev: {previous_is_upright}")
+        previous_is_upright = is_upright
+    
     dc.stop()
     
     log_info("Payload out of bay, aligning camera arm")
     
     # do alignment by extending until angle to alignment is less than 5
+    align_time = datetime.now()
     dc.extend()
     while True:
         theta_DC,theta_0 = imu.GetAdjustments()
-        if abs(theta_DC) < 3:
+        if theta_DC > 0 and theta_DC < 6 or (datetime.now() - align_time).total_seconds() > 5:
             break
     dc.stop()
     
@@ -146,12 +175,15 @@ def deployPayload(debug=False):
 def conductExperiment(debug=False):
     # python -c 'import main; main.conductExperiment(True)'
     
-    # if debug:
-    #     theta_DC,theta_0 = imu.GetAdjustments()
-    #     s1.rotate(theta_0)
+    # theta_DC,theta_0 = imu.GetAdjustments()
+    # s0.rotate(theta_0)
      
     #region perform standard experiement to begin with
     defaultExperiment()
+    
+    cam.reset_all()
+    s1.reset()
+            
     #endregion
     log_info("Conducting Experiment")
     todo_cmds = []
@@ -172,7 +204,6 @@ def conductExperiment(debug=False):
         # execute commands
         if todo_cmds:
             # reset camera 
-            cam.reset_all()
             
             experiment_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             dir = f"payload_experiment_{experiment_time}"
@@ -205,6 +236,8 @@ def conductExperiment(debug=False):
             break
         print(f"done commands: {done_cmds}")
         print(f"todo commands: {todo_cmds}")
+        cam.reset_all()
+        s1.reset()
 
 def defaultExperiment():
     # python -c 'import main; main.defaultExperiment()'
@@ -219,9 +252,9 @@ def defaultExperiment():
     for cmd in cmd_set:
         log_info(f"action: {cmd}")
         if (cmd == "A1"): # Turn camera 60º to the right
-            s1.rotate(60)
+            s1.right()
         elif (cmd == "B2"): #Turn camera 60º to the left
-            s1.rotate(-60)
+            s1.left()
         elif (cmd == "C3"): # Take picture
             cam.capture(folder=dir)
         elif (cmd == "D4"): # Change camera mode from color to grayscale
@@ -244,6 +277,11 @@ def set_s0():
     # python -c 'import main; main.set_s0()'
     theta_DC,theta_0 = imu.GetAdjustments()
     s0.rotate(theta_0)
+    
+def set_s1():
+    # python -c 'import main; main.set_s1()'
+    # theta_DC,theta_0 = imu.GetAdjustments()
+    s1.left()
     
 def cleanup():
     # python -c 'import main; main.cleanup()'
@@ -269,16 +307,21 @@ def log_info(message, print_terminal=True):
 if __name__ == "__main__":
     try:
         if run:
+            beep(time_high=1)
+            s1.left()
+            time.sleep(.5)
+            s1.right()
             main()
         else:
+            print("run variable is False")
             beep(time_high=.1, time_low=.1, n = 4)
     except Exception as e:
         # instead of quietly erroring, write the error to a file, beep 
         # like hell, and then still attempt to raise the error
-        log_info(str(e))
+        log_info(">>>>>"+str(e))
         print(e)
         for i in range(10):
             beep(0.1, 0.1)
-        raise(e)
+        # raise(e)
         
 

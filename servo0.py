@@ -10,7 +10,7 @@ factory = PiGPIOFactory()
 servo = Servo(23, min_pulse_width=0.5/1000, max_pulse_width=2.5/1000, pin_factory=factory)
 
 limit_angle = -40/90 # angle where servo hits camera platform
-adjustment_angle = -23 # angle from min servo to horizontal
+adjustment_angle = -10 # angle from min servo to horizontal
 servo.value = None # prevents servo from moving upon init
 
 class Servo0:
@@ -25,7 +25,7 @@ class Servo0:
         servo.mid()
         time.sleep(1)
         servo.max() 
-        time.sleep(1)
+ 
         self.stop()
     
     def rotate(self, degrees):
@@ -52,3 +52,9 @@ def test():
     # python -c 'import servo0; servo0.test()'
     s0 = Servo0()
     s0.test()
+    # servo.mid()
+    # time.sleep(1)
+    # servo.value = None
+    # servo.value = -1
+    # time.sleep(.2)
+    # s0.stop()
