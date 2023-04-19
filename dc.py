@@ -18,6 +18,10 @@ class DC:
 def test():
     # python -c 'import dc; dc.test()'
     dc = DC()
+    # print("testing DC motor")
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(12, GPIO.OUT)
+    # GPIO.output(12, GPIO.LOW)
     dc.extend()
     time.sleep(2)
     dc.stop()

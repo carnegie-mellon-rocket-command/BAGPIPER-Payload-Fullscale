@@ -3,13 +3,18 @@
 import math
 import board
 from adafruit_lsm6ds.ism330dhcx import ISM330DHCX
+from buzzer import Buzzer
 
+b = Buzzer()
 accels = (0,0,0)
 class IMU:
     
     def __init__(self):
-        self.i2c = board.I2C()
-        self.sensor = ISM330DHCX(self.i2c)
+        try:
+            self.i2c = board.I2C()
+            self.sensor = ISM330DHCX(self.i2c)
+        except:
+            b.beep(on_t = 1, n=3)
         print("imu initiated")
 
     def GetAdjustments(self):
