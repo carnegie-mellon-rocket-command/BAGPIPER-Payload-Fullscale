@@ -152,6 +152,7 @@ def deployPayload(debug=False):
         log_info(f"rotations: {rotations}, is_upright: {is_upright}, prev: {previous_is_upright}")
         previous_is_upright = is_upright
     
+    
     dc.stop()
     
     log_info("Payload out of bay, aligning camera arm")
